@@ -1,106 +1,47 @@
-import { useRef, useState } from 'react'
-import { motion, useInView } from 'framer-motion'
-import { MapPin, ArrowRight, ChevronLeft, ChevronRight, Home, Calendar, Check } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
-
-const projects = [
-  {
-    id: 1,
-    name: 'SSR signature Gardenia',
-    location: 'Near East Point College (Back Gate), Kithaganur - Bidarahalli Main Road, Bangalore - 560049',
-    image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774809091/Signature_Gardenia_SSR_uueh2e.jpg',
-    status: 'On Going',
-    price: '₹1Cr-₹1.5Cr',
-    type: 'Villas & Plots',
-    units: '120 Units',
-    completion: 'Dec 2025',
-    description: 'Modern apartments with smart home features in the heart of Bangalore IT corridor.',
-    features: ['2 & 3 BHK', 'Smart Home', 'Club House', 'Swimming Pool'],
-  },
-  {
-    id: 2,
-    name: 'SSR Green Farms',
-    location: 'NH75, Mulbagal, Kolar',
-    image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774846011/SSR_FarmLands_ne05hu.png',
-    status: 'On Going',
-    price: 'Starting from ₹45L onwards',
-    type: 'FarmLands with amenities',
-    units: '80 Units',
-    completion: 'Mar 2026',
-    description: 'Peaceful FarmLands with lush green surroundings and premium amenities.',
-    features: ['3 & 4 BHK', 'Private Garden', 'Gated Community', '24/7 Security'],
-  },
-  {
-    id: 3,
-    name: 'SSR Advam Residency',
-    location: 'Bangalore',
-    image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774871826/24.jpg_2_ks6ipn.jpg',
-    status: 'On Going',
-    price: 'starting from ₹ 1Cr',
-    type: 'Luxury Apartments',
-    units: '200 Units',
-    completion: 'Jun 2026',
-    description: 'Premium sea-facing apartments with world-class amenities in Mumbai.',
-    features: ['3 & 4 BHK', 'Sea View', 'Sky Lounge', 'Fitness Center'],
-  },
-  {
-    id: 4,
-    name: 'SSR Signature Gardenia',
-    location: 'Bangalore',
-    image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774846011/SSR_Villa_zay5vn.png',
-    status: 'Ready to Move',
-    price: 'starting from ₹ 1Cr',
-    type: 'Plots & Villas',
-    units: '225 Units',
-    completion: 'Ready',
-    description: '10-acre gated community with plots and ready-to-move villas.',
-    features: ['Plots & Villas', '10 Acres', 'Club House', 'Swimming Pool'],
-  },
-  {
-    id: 5,
-    name: 'SSR Advam Residency',
-    location: 'Bangalore',
-    image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774871826/2.jpg_o6e9rf.jpg',
-    status: 'New Launch',
-    price: 'starting from ₹ 1Cr',
-    type: 'Apartments',
-    units: '150 Units',
-    completion: 'Dec 2027',
-    description: 'Eco-friendly apartments with sustainable living features.',
-    features: ['2 & 3 BHK', 'Eco-Friendly', 'Solar Power', 'Rainwater Harvesting'],
-  },
-]
+import { useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
+import {
+  MapPin,
+  ArrowRight,
+  ChevronLeft,
+  ChevronRight,
+  Home,
+  Calendar,
+  Check,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { useModal } from "../contexts/ModalContext";
+import { projects } from "../Assets/Data";
 
 export default function Projects() {
-  const ref = useRef(null)
-  const scrollContainerRef = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
-  const [selectedProject, setSelectedProject] = useState(null)
+  const ref = useRef(null);
+  const scrollContainerRef = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { openModal } = useModal();
 
   const scroll = (direction) => {
     if (scrollContainerRef.current) {
-      const scrollAmount = 400
+      const scrollAmount = 400;
       scrollContainerRef.current.scrollBy({
-        left: direction === 'left' ? -scrollAmount : scrollAmount,
-        behavior: 'smooth'
-      })
+        left: direction === "left" ? -scrollAmount : scrollAmount,
+        behavior: "smooth",
+      });
     }
-  }
+  };
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'On Going':
-        return 'bg-blue-500'
-      case 'Ready to Move':
-        return 'bg-green-500'
-      case 'New Launch':
-        return 'bg-purple-500'
+      case "On Going":
+        return "bg-blue-500";
+      case "Ready to Move":
+        return "bg-green-500";
+      case "New Launch":
+        return "bg-purple-500";
       default:
-        return 'bg-gray-500'
+        return "bg-gray-500";
     }
-  }
+  };
 
   return (
     <section ref={ref} className="py-24 bg-gradient-to-b from-gray-50 to-white">
@@ -120,8 +61,8 @@ export default function Projects() {
               Top Affordable & Luxury Projects in Bangalore
             </h2>
             <p className="text-gray-500 mt-3 max-w-2xl text-base">
-              Discover a wide range of individual houses, plots, and residential sites — trusted by
-              hundreds of happy homeowners across Bangalore.
+              Discover a wide range of individual houses, plots, and residential
+              sites — trusted by hundreds of happy homeowners across Bangalore.
             </p>
           </div>
 
@@ -129,7 +70,7 @@ export default function Projects() {
             <Button
               variant="outline"
               size="icon"
-              onClick={() => scroll('left')}
+              onClick={() => scroll("left")}
               className="rounded-full border-2 hover:bg-[#c89b3c] hover:text-white hover:border-[#c89b3c]"
             >
               <ChevronLeft className="w-5 h-5" />
@@ -137,7 +78,7 @@ export default function Projects() {
             <Button
               variant="outline"
               size="icon"
-              onClick={() => scroll('right')}
+              onClick={() => scroll("right")}
               className="rounded-full border-2 hover:bg-[#c89b3c] hover:text-white hover:border-[#c89b3c]"
             >
               <ChevronRight className="w-5 h-5" />
@@ -152,10 +93,11 @@ export default function Projects() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-gray-500 text-sm max-w-3xl mb-10 leading-relaxed"
         >
-          Bangalore's rapid growth as an investment hub has surged demand for quality housing. Whether
-          you envision a luxurious home, an elegant plot, or a well-planned development — SSR Properties
-          offers premium and affordable residential projects that blend comfort, convenience, and modern
-          elegance. Your dream home is now within reach.
+          Bangalore's rapid growth as an investment hub has surged demand for
+          quality housing. Whether you envision a luxurious home, an elegant
+          plot, or a well-planned development — SSR Properties offers premium
+          and affordable residential projects that blend comfort, convenience,
+          and modern elegance. Your dream home is now within reach.
         </motion.p>
 
         {/* Horizontal Scroll Container */}
@@ -170,7 +112,7 @@ export default function Projects() {
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.3 }}
             className="flex gap-6 overflow-x-auto pb-6 scrollbar-hide snap-x snap-mandatory"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
             {projects.map((project, index) => (
               <motion.div
@@ -183,7 +125,7 @@ export default function Projects() {
               >
                 <div
                   className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer group h-full"
-                  onClick={() => setSelectedProject(project)}
+                  onClick={() => openModal("projectDetail", project)}
                 >
                   {/* Image */}
                   <div className="relative h-56 overflow-hidden">
@@ -204,7 +146,9 @@ export default function Projects() {
 
                     {/* Price */}
                     <div className="absolute bottom-4 left-4">
-                      <p className="text-white font-bold text-xl">{project.price}</p>
+                      <p className="text-white font-bold text-xl">
+                        {project.price}
+                      </p>
                     </div>
                   </div>
 
@@ -244,73 +188,6 @@ export default function Projects() {
           </motion.div>
         </div>
       </div>
-
-      {/* Project Detail Dialog */}
-      <Dialog open={!!selectedProject} onOpenChange={() => setSelectedProject(null)}>
-        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
-          {selectedProject && (
-            <>
-              <DialogHeader>
-                <DialogTitle className="text-2xl font-bold">{selectedProject.name}</DialogTitle>
-              </DialogHeader>
-
-              <div className="mt-4">
-                <img
-                  src={selectedProject.image}
-                  alt={selectedProject.name}
-                  className="w-full h-64 object-cover rounded-xl mb-6"
-                />
-
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <Badge className={getStatusColor(selectedProject.status)}>
-                    {selectedProject.status}
-                  </Badge>
-                  <Badge variant="outline">{selectedProject.type}</Badge>
-                  <Badge variant="outline">{selectedProject.units}</Badge>
-                </div>
-
-                <p className="text-gray-600 mb-6">{selectedProject.description}</p>
-
-                <div className="grid grid-cols-2 gap-4 mb-6">
-                  <div className="bg-gray-50 p-4 rounded-xl">
-                    <p className="text-sm text-gray-500">Price Range</p>
-                    <p className="text-lg font-semibold text-[#c89b3c]">{selectedProject.price}</p>
-                  </div>
-                  <div className="bg-gray-50 p-4 rounded-xl">
-                    <p className="text-sm text-gray-500">Completion</p>
-                    <p className="text-lg font-semibold">{selectedProject.completion}</p>
-                  </div>
-                </div>
-
-                <div className="mb-6">
-                  <h4 className="font-semibold mb-3">Key Features</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {selectedProject.features.map((feature) => (
-                      <span
-                        key={feature}
-                        className="flex items-center gap-1 bg-[#c89b3c]/10 text-[#c89b3c] px-3 py-1 rounded-full text-sm"
-                      >
-                        <Check className="w-4 h-4" />
-                        {feature}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <Button
-                  onClick={() => {
-                    setSelectedProject(null)
-                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
-                  }}
-                  className="w-full h-12 bg-gradient-to-r from-[#c89b3c] to-[#e6c66a] text-white font-semibold rounded-full"
-                >
-                  Book Site Visit
-                </Button>
-              </div>
-            </>
-          )}
-        </DialogContent>
-      </Dialog>
     </section>
-  )
+  );
 }

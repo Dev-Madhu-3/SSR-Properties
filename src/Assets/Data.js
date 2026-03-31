@@ -1,4 +1,4 @@
-const blogPosts = [
+export const blogPosts = [
     {
         id: 1,
         title: 'How Location Impacts Property Value: A Complete Guide for Plot & Individual House Buyers',
@@ -300,4 +300,71 @@ const blogPosts = [
         featured: false,
     },
 ]
-export default data;
+
+export const projects = [
+  {
+    id: 1,
+    name: 'SSR signature Gardenia',
+    location: 'Near East Point College (Back Gate), Kithaganur - Bidarahalli Main Road, Bangalore - 560049',
+    image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774809091/Signature_Gardenia_SSR_uueh2e.jpg',
+    status: 'On Going',
+    price: '₹1Cr-₹1.5Cr',
+    type: 'Villas & Plots',
+    units: '120 Units',
+    completion: 'Dec 2025',
+    description: 'Modern apartments with smart home features in the heart of Bangalore IT corridor.',
+    features: ['2 & 3 BHK', 'Smart Home', 'Club House', 'Swimming Pool'],
+  },
+  {
+    id: 2,
+    name: 'SSR Green Farms',
+    location: 'NH75, Mulbagal, Kolar',
+    image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774846011/SSR_FarmLands_ne05hu.png',
+    status: 'On Going',
+    price: 'Starting from ₹45L onwards',
+    type: 'FarmLands with amenities',
+    units: '80 Units',
+    completion: 'Mar 2026',
+    description: 'Peaceful FarmLands with lush green surroundings and premium amenities.',
+    features: ['3 & 4 BHK', 'Private Garden', 'Gated Community', '24/7 Security'],
+  },
+  {
+    id: 3,
+    name: 'SSR Advam Residency',
+    location: 'Bangalore',
+    image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774871826/24.jpg_2_ks6ipn.jpg',
+    status: 'On Going',
+    price: 'starting from ₹ 1Cr',
+    type: 'Luxury Apartments',
+    units: '200 Units',
+    completion: 'Jun 2026',
+    description: 'Premium sea-facing apartments with world-class amenities in Mumbai.',
+    features: ['3 & 4 BHK', 'Sea View', 'Sky Lounge', 'Fitness Center'],
+  },
+  {
+    id: 4,
+    name: 'SSR Signature Gardenia',
+    location: 'Bangalore',
+    image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774846011/SSR_Villa_zay5vn.png',
+    status: 'Ready to Move',
+    price: 'starting from ₹ 1Cr',
+    type: 'Plots & Villas',
+    units: '225 Units',
+    completion: 'Ready',
+    description: '10-acre gated community with plots and ready-to-move villas.',
+    features: ['Plots & Villas', '10 Acres', 'Club House', 'Swimming Pool'],
+  },
+  {
+    id: 5,
+    name: 'SSR Advam Residency',
+    location: 'Bangalore',
+    image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774871826/2.jpg_o6e9rf.jpg',
+    status: 'New Launch',
+    price: 'starting from ₹ 1Cr',
+    type: 'Apartments',
+    units: '150 Units',
+    completion: 'Dec 2027',
+    description: 'Eco-friendly apartments with sustainable living features.',
+    features: ['2 & 3 BHK', 'Eco-Friendly', 'Solar Power', 'Rainwater Harvesting'],
+  },
+]
