@@ -3,11 +3,14 @@ import { Helmet } from 'react-helmet-async'
 import { motion, AnimatePresence } from 'framer-motion'
 import Navbar from './sections/Navbar'
 import Hero from './sections/Hero'
+import HeroDetail from './sections/HeroDetail'
 import FeaturedSlider from './sections/FeaturedSlider'
 import About from './sections/About'
+import AboutDetail from './sections/AboutDetail'
 import ProjectDetail from './sections/ProjectDetail'
 import Projects from './sections/Projects'
 import Blog from './sections/Blog'
+import BlogPostDetail from './sections/BlogPostDetail'
 import Contact from './sections/Contact'
 import Footer from './sections/Footer'
 import ScrollToTop from './components/ScrollToTop'
@@ -16,6 +19,9 @@ import './App.css'
 function App() {
   const [activeSection, setActiveSection] = useState('home')
   const [isLoading, setIsLoading] = useState(true)
+  const [viewingPostId, setViewingPostId] = useState(null)
+  const [viewingAbout, setViewingAbout] = useState(false)
+  const [viewingHero, setViewingHero] = useState(false)
 
   useEffect(() => {
     // Simulate initial loading
@@ -87,29 +93,50 @@ function App() {
         <div className="min-h-screen bg-white">
           <Navbar activeSection={activeSection} />
           
-          <main>
-            <section id="home">
-              <Hero />
-              <FeaturedSlider />
-            </section>
-            
-            <section id="about">
-              <About />
-              <ProjectDetail />
-            </section>
-            
-            <section id="projects">
-              <Projects />
-            </section>
-            
-            <section id="blog">
-              <Blog />
-            </section>
-            
-            <section id="contact">
-              <Contact />
-            </section>
-          </main>
+          {viewingHero ? (
+            <main>
+              <HeroDetail 
+                onBack={() => setViewingHero(false)}
+              />
+            </main>
+          ) : viewingPostId ? (
+            <main>
+              <BlogPostDetail 
+                postId={viewingPostId} 
+                onBack={() => setViewingPostId(null)}
+              />
+            </main>
+          ) : viewingAbout ? (
+            <main>
+              <AboutDetail 
+                onBack={() => setViewingAbout(false)}
+              />
+            </main>
+          ) : (
+            <main>
+              <section id="home">
+                <Hero onViewHero={() => setViewingHero(true)} />
+                <FeaturedSlider />
+              </section>
+              
+              <section id="about">
+                <About onViewAbout={() => setViewingAbout(true)} />
+                <ProjectDetail />
+              </section>
+              
+              <section id="projects">
+                <Projects />
+              </section>
+              
+              <section id="blog">
+                <Blog onViewPost={(postId) => setViewingPostId(postId)} />
+              </section>
+              
+              <section id="contact">
+                <Contact />
+              </section>
+            </main>
+          )}
           
           <Footer />
           <ScrollToTop />

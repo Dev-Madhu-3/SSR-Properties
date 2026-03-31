@@ -5,73 +5,73 @@ import { MapPin, Bed, Bath, Square } from 'lucide-react'
 const properties = [
   {
     id: 1,
-    image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=600&q=80',
-    title: 'Modern Villa',
-    location: 'Whitefield, Bangalore',
-    price: '₹2.5 Cr',
+    image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774871827/GreenFarms_cjsuwq.png',
+    title: 'SSR Farm Lands',
+    location: 'Mulbagal , Bangalore',
+    price: '₹45L onwards',
     beds: 4,
     baths: 3,
     sqft: '3,500',
   },
   {
     id: 2,
-    image: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=600&q=80',
+    image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774871825/p2_jhhrym.png',
     title: 'Luxury Apartment',
-    location: 'Gachibowli, Hyderabad',
-    price: '₹1.8 Cr',
+    location: 'Bangalore, India',
+    price: 'starting from ₹1 Cr',
     beds: 3,
     baths: 2,
     sqft: '2,200',
   },
   {
     id: 3,
-    image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=600&q=80',
-    title: 'Penthouse Suite',
-    location: 'Bandra, Mumbai',
-    price: '₹5.2 Cr',
+    image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774871825/h6.jpg_zxqqig.jpg',
+    title: 'SSR Signature Gardenia',
+    location: 'Bangalore, India',
+    price: 'starting from ₹1 Cr',
     beds: 5,
     baths: 4,
-    sqft: '4,500',
+    sqft: '1200',
   },
   {
     id: 4,
-    image: 'https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=600&q=80',
-    title: 'Garden Villa',
-    location: 'Sarjapur, Bangalore',
-    price: '₹3.1 Cr',
+    image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774846011/SSR_FarmLands_ne05hu.png',
+    title: 'SSR Farm Lands',
+    location: 'Mulbagal , Bangalore',
+    price: '₹45L onwards',
     beds: 4,
     baths: 3,
     sqft: '3,800',
   },
   {
     id: 5,
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80',
-    title: 'Premium Duplex',
-    location: 'Hitech City, Hyderabad',
-    price: '₹2.2 Cr',
+    image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774809091/Signature_Gardenia_SSR_uueh2e.jpg',
+    title: 'SSR Signature Gardenia',
+    location: 'Kr puram, Bangalore',
+    price: 'starting from ₹1 Cr',
     beds: 3,
     baths: 3,
-    sqft: '2,800',
+    sqft: '1,200',
   },
   {
     id: 6,
-    image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=600&q=80',
+    image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774809635/SSR_img_f98wby.jpg',
     title: 'Sea View Apartment',
-    location: 'Juhu, Mumbai',
-    price: '₹4.5 Cr',
+    location: 'Kr puram, Bangalore',
+    price: 'starting from ₹1 Cr',
     beds: 4,
     baths: 3,
-    sqft: '3,200',
+    sqft: '1,200',
   },
   {
     id: 7,
-    image: 'https://images.unsplash.com/photo-1599423300746-b62533397364?auto=format&fit=crop&w=600&q=80',
+    image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774845322/SSR_Advam_Residency_uy1nef.png',
     title: 'Smart Home Villa',
-    location: 'Electronic City, Bangalore',
-    price: '₹1.9 Cr',
+    location: 'Kr puram, Bangalore',
+    price: 'starting from ₹1 Cr',
     beds: 3,
     baths: 2,
-    sqft: '2,400',
+    sqft: '1,200',
   },
 ]
 
@@ -140,7 +140,7 @@ export default function FeaturedSlider() {
                   <p className="text-white font-semibold text-lg">{property.price}</p>
                 </div>
               </div>
-              
+
               <div className="p-5">
                 <h3 className="font-semibold text-lg text-gray-900 mb-2 group-hover:text-[#c89b3c] transition-colors">
                   {property.title}
@@ -149,7 +149,7 @@ export default function FeaturedSlider() {
                   <MapPin className="w-4 h-4 mr-1 text-[#c89b3c]" />
                   {property.location}
                 </div>
-                
+
                 <div className="flex justify-between items-center pt-4 border-t border-gray-100">
                   <div className="flex items-center gap-4 text-sm text-gray-600">
                     <span className="flex items-center gap-1">

@@ -10,12 +10,13 @@ const stats = [
 ]
 
 const heroImages = [
-  'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80',
-  'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1920&q=80',
-  'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1920&q=80',
+  'https://res.cloudinary.com/djuoignk5/image/upload/v1774871830/Farmlands.jpg_un2jpy.jpg',
+  'https://res.cloudinary.com/djuoignk5/image/upload/v1774871827/GreenFarms_cjsuwq.png',
+  'https://res.cloudinary.com/djuoignk5/image/upload/v1774843910/SSR_Villa_q25pqw.png',
+  'https://res.cloudinary.com/djuoignk5/image/upload/v1774846011/SSR_FarmLands_ne05hu.png'
 ]
 
-export default function Hero() {
+export default function Hero({ onViewHero }) {
   const [currentImage, setCurrentImage] = useState(0)
 
   useEffect(() => {
@@ -40,14 +41,14 @@ export default function Hero() {
         <motion.div
           key={image}
           initial={{ opacity: 0 }}
-          animate={{ 
+          animate={{
             opacity: currentImage === index ? 1 : 0,
             scale: currentImage === index ? 1 : 1.1
           }}
           transition={{ duration: 1.5, ease: 'easeInOut' }}
           className="absolute inset-0"
         >
-          <div 
+          <div
             className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: `url(${image})` }}
           />
@@ -64,15 +65,15 @@ export default function Hero() {
           <motion.div
             key={i}
             className="absolute w-2 h-2 bg-[#c89b3c]/30 rounded-full"
-            initial={{ 
+            initial={{
               x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1000),
               y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
             }}
-            animate={{ 
+            animate={{
               y: [null, -100],
               opacity: [0, 1, 0]
             }}
-            transition={{ 
+            transition={{
               duration: Math.random() * 5 + 5,
               repeat: Infinity,
               delay: Math.random() * 5
@@ -132,11 +133,11 @@ export default function Hero() {
                 Explore Projects
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
-              
+
               <Button
                 onClick={() => scrollToSection('contact')}
                 variant="outline"
-                className="h-14 px-8 border-2 border-white/30 text-white hover:bg-white/10 font-semibold rounded-full text-base"
+                className="h-14 px-8 border-2 border-white/30 bg-transparent text-white hover:bg-white/10 font-semibold rounded-full text-base"
               >
                 Contact Us
               </Button>
@@ -181,7 +182,7 @@ export default function Hero() {
                 className="bg-white/10 backdrop-blur-xl rounded-3xl p-6 border border-white/20"
               >
                 <img
-                  src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=600&q=80"
+                  src="https://res.cloudinary.com/djuoignk5/image/upload/v1774809091/Signature_Gardenia_SSR_uueh2e.jpg"
                   alt="Featured Property"
                   className="w-full h-64 object-cover rounded-2xl mb-4"
                 />
@@ -199,7 +200,8 @@ export default function Hero() {
                     <span className="text-2xl font-bold">₹85L</span>
                     <span className="text-white/60 text-sm"> onwards</span>
                   </div>
-                  <Button 
+                  <Button
+                    onClick={() => onViewHero && onViewHero()}
                     size="sm"
                     className="bg-white/20 hover:bg-white/30 text-white rounded-full"
                   >
@@ -231,9 +233,8 @@ export default function Hero() {
           <button
             key={index}
             onClick={() => setCurrentImage(index)}
-            className={`w-12 h-1 rounded-full transition-all duration-300 ${
-              currentImage === index ? 'bg-[#c89b3c]' : 'bg-white/30'
-            }`}
+            className={`w-12 h-1 rounded-full transition-all duration-300 ${currentImage === index ? 'bg-[#c89b3c]' : 'bg-white/30'
+              }`}
           />
         ))}
       </div>

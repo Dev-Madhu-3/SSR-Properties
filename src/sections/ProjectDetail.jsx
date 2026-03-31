@@ -1,8 +1,13 @@
 import { useRef, useState } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
-import { Check, MapPin, Home, Maximize, Trees, Car, Shield, Waves, Dumbbell, Play } from 'lucide-react'
+import { Check, MapPin, Home, Maximize, Trees, Car, Shield, Waves, Dumbbell, Play, Download, Loader2, CheckCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent } from '@/components/ui/dialog'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Textarea } from '@/components/ui/textarea'
+import { toast } from 'sonner'
+import emailjs from 'emailjs-com'
 
 const amenities = [
   { icon: Shield, label: '24/7 Security' },
@@ -15,9 +20,8 @@ const amenities = [
 
 const highlights = [
   '10 acres gated community with 225 houses & plots',
-  '25, 30 & 35 ft Asphalt Roads',
+  '25, 30, 35 & 40 ft Asphalt Roads',
   'Integrated Drainage System',
-  'Borewell Water Supply',
   'East, West & North Facing Homes',
   'Underground Electrical Cabling',
   'Street Lighting',
@@ -25,10 +29,10 @@ const highlights = [
 ]
 
 const galleryImages = [
-  'https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=600&q=80',
+  'https://res.cloudinary.com/djuoignk5/image/upload/v1774809635/SSR_img_f98wby.jpg',
   'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80',
-  'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=600&q=80',
-  'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=600&q=80',
+  'https://res.cloudinary.com/djuoignk5/image/upload/v1774809539/SSR_Signature_Gardenia_vf7jd4.jpg',
+  'https://res.cloudinary.com/djuoignk5/image/upload/v1774809091/Signature_Gardenia_SSR_uueh2e.jpg',
 ]
 
 export default function ProjectDetail() {
@@ -36,12 +40,66 @@ export default function ProjectDetail() {
   const isInView = useInView(ref, { once: true, margin: '-100px' })
   const [selectedImage, setSelectedImage] = useState(null)
   const [showVideo, setShowVideo] = useState(false)
+  const [showBrochureModal, setShowBrochureModal] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    message: '',
+  })
 
   const scrollToContact = () => {
     const element = document.getElementById('contact')
     if (element) {
       const offsetTop = element.offsetTop - 80
       window.scrollTo({ top: offsetTop, behavior: 'smooth' })
+    }
+  }
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target
+    setFormData(prev => ({ ...prev, [name]: value }))
+  }
+
+  const handleBrochureSubmit = async (e) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+
+    try {
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID'
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID2 || 'YOUR_TEMPLATE_ID'
+      const userId = import.meta.env.VITE_EMAILJS_USER_ID || 'YOUR_USER_ID'
+
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message,
+          to_email: 'yanamalaveera01@gmail.com, surendraoffline@gmail.com, sales@ssrproperties.in, info@ssrproperties.in',
+        },
+        userId
+      )
+
+      setIsSuccess(true)
+      toast.success('Thank you! We will contact you within 24 hours.')
+      // Open brochure PDF immediately
+      window.open('/Gundur Brochure_17-06-23 (1).pdf', '_blank')
+
+      setTimeout(() => {
+        setIsSuccess(false)
+        setFormData({ name: '', phone: '', email: '', message: '' })
+        setShowBrochureModal(false)
+      }, 3000)
+    } catch (error) {
+      console.error('Email error:', error)
+      toast.error('Failed to send message. Please try calling us directly.')
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -59,22 +117,22 @@ export default function ProjectDetail() {
             <span className="inline-block bg-[#c89b3c]/10 text-[#c89b3c] px-4 py-1 rounded-full text-sm font-medium mb-4">
               Flagship Project
             </span>
-            
+
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">
               SSR Signature Gardenia
             </h2>
             <p className="text-[#c89b3c] font-medium text-lg mb-4">
               Where Serenity Meets Sophistication
             </p>
-            
+
             <div className="flex items-center text-gray-500 mb-6">
               <MapPin className="w-5 h-5 mr-2 text-[#c89b3c]" />
               <span>Kithaganuru, KR Puram, Bangalore</span>
             </div>
 
             <p className="text-gray-600 mb-8 leading-relaxed">
-              Experience the perfect blend of modern lifestyle and natural tranquility at SSR Signature Gardenia. 
-              Spread across 10 acres, this gated community offers 225 meticulously designed houses and plots 
+              Experience the perfect blend of modern lifestyle and natural tranquility at SSR Signature Gardenia.
+              Spread across 10 acres, this gated community offers 225 meticulously designed houses and plots
               with world-class amenities that cater to every aspect of contemporary living.
             </p>
 
@@ -119,6 +177,14 @@ export default function ProjectDetail() {
               >
                 <Home className="w-5 h-5 mr-2" />
                 Book Site Visit
+              </Button>
+              <Button
+                onClick={() => setShowBrochureModal(true)}
+                variant="outline"
+                className="h-12 px-8 border-2 border-[#c89b3c] text-[#c89b3c] hover:bg-[#c89b3c] hover:text-white font-semibold rounded-full"
+              >
+                <Download className="w-5 h-5 mr-2" />
+                Download Brochure
               </Button>
               <Button
                 onClick={() => setShowVideo(true)}
@@ -205,12 +271,108 @@ export default function ProjectDetail() {
       {/* Video Dialog */}
       <Dialog open={showVideo} onOpenChange={setShowVideo}>
         <DialogContent className="max-w-4xl p-0 overflow-hidden">
-          <div className="aspect-video bg-gray-900 flex items-center justify-center">
-            <div className="text-center text-white">
-              <Play className="w-16 h-16 mx-auto mb-4 opacity-50" />
-              <p className="text-lg">Video coming soon</p>
-              <p className="text-sm opacity-60">Contact us for a physical site visit</p>
-            </div>
+          <div className="aspect-video">
+            <iframe
+              width="100%"
+              height="100%"
+              src="https://www.youtube.com/embed/zC19kcLxxJU?autoplay=1&start=6"
+              title="SSR Properties"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Brochure Modal */}
+      <Dialog open={showBrochureModal} onOpenChange={setShowBrochureModal}>
+        <DialogContent className="max-w-md">
+          <div className="p-6">
+            <h3 className="text-2xl font-bold text-gray-900 mb-2">Download Brochure</h3>
+            <p className="text-gray-600 mb-6">
+              Fill out the form to download our project brochure.
+            </p>
+
+            {isSuccess ? (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="text-center py-8"
+              >
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <CheckCircle className="w-8 h-8 text-green-500" />
+                </div>
+                <h4 className="text-lg font-semibold text-gray-900 mb-2">Thank You!</h4>
+                <p className="text-gray-600 text-sm">Your brochure download will start shortly.</p>
+              </motion.div>
+            ) : (
+              <form onSubmit={handleBrochureSubmit} className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="brochure-name">Full Name *</Label>
+                  <Input
+                    id="brochure-name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    placeholder="John Doe"
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="brochure-phone">Phone Number *</Label>
+                  <Input
+                    id="brochure-phone"
+                    name="phone"
+                    type="tel"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    placeholder="+91 98765 43210"
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="brochure-email">Email Address</Label>
+                  <Input
+                    id="brochure-email"
+                    name="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    placeholder="you@example.com"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="brochure-message">Message</Label>
+                  <Textarea
+                    id="brochure-message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    placeholder="Tell us about your requirements..."
+                    rows={3}
+                    className="resize-none"
+                  />
+                </div>
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full bg-gradient-to-r from-[#c89b3c] to-[#e6c66a] hover:from-[#b88a2d] hover:to-[#d5b559] text-white font-semibold rounded-full"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Download className="w-4 h-4 mr-2" />
+                      Download Brochure
+                    </>
+                  )}
+                </Button>
+              </form>
+            )}
           </div>
         </DialogContent>
       </Dialog>

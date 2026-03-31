@@ -12,7 +12,7 @@ const contactInfo = [
   {
     icon: Phone,
     title: 'Phone',
-    details: ['+91 99002 28668', '+91 96326 16633'],
+    details: ['+91 96326 16633', '+91 99002 28668'],
     color: 'from-blue-500 to-blue-600',
   },
   {
@@ -65,18 +65,18 @@ export default function Contact() {
       // 4. Get your public key from Account > API Keys
       
       const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID'
-      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID'
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID_2 || 'YOUR_TEMPLATE_ID'
       const userId = import.meta.env.VITE_EMAILJS_USER_ID || 'YOUR_USER_ID'
 
       await emailjs.send(
         serviceId,
         templateId,
         {
-          from_name: formData.name,
-          from_email: formData.email,
+          name: formData.name,
+          email: formData.email,
           phone: formData.phone,
           message: formData.message,
-          to_email: 'sales@ssrproperties.in',
+          to_email: 'yanamalaveera01@gmail.com, surendraoffline@gmail.com',
         },
         userId
       )

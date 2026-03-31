@@ -8,12 +8,12 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 const projects = [
   {
     id: 1,
-    name: 'SSR Silicon Shine',
+    name: 'SSR signature Gardenia',
     location: 'Bangalore',
-    image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=800&q=80',
+    image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774843910/SSR_Villa_q25pqw.png',
     status: 'On Going',
-    price: '₹65L - ₹1.2Cr',
-    type: 'Apartments',
+    price: '₹1Cr-₹1.5Cr',
+    type: 'Villas & Plots',
     units: '120 Units',
     completion: 'Dec 2025',
     description: 'Modern apartments with smart home features in the heart of Bangalore IT corridor.',
@@ -21,24 +21,24 @@ const projects = [
   },
   {
     id: 2,
-    name: 'SSR Tranquila',
-    location: 'Hyderabad',
-    image: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80',
+    name: 'SSR Green Farms',
+    location: 'Bangalore',
+    image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774809635/SSR_img_f98wby.jpg',
     status: 'On Going',
-    price: '₹45L - ₹95L',
-    type: 'Villas',
+    price: 'Starting from ₹45L onwards',
+    type: 'FarmLands with amenities',
     units: '80 Units',
     completion: 'Mar 2026',
-    description: 'Peaceful villa community with lush green surroundings and premium amenities.',
+    description: 'Peaceful FarmLands with lush green surroundings and premium amenities.',
     features: ['3 & 4 BHK', 'Private Garden', 'Gated Community', '24/7 Security'],
   },
   {
     id: 3,
-    name: 'SSR Natura',
-    location: 'Mumbai',
-    image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80',
+    name: 'SSR Advam Residency',
+    location: 'Bangalore',
+    image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774871826/24.jpg_2_ks6ipn.jpg',
     status: 'On Going',
-    price: '₹1.5Cr - ₹3.5Cr',
+    price: 'starting from ₹ 1Cr',
     type: 'Luxury Apartments',
     units: '200 Units',
     completion: 'Jun 2026',
@@ -49,9 +49,9 @@ const projects = [
     id: 4,
     name: 'SSR Signature Gardenia',
     location: 'Bangalore',
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
+    image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774846011/SSR_Villa_zay5vn.png',
     status: 'Ready to Move',
-    price: '₹85L - ₹2.1Cr',
+    price: 'starting from ₹ 1Cr',
     type: 'Plots & Villas',
     units: '225 Units',
     completion: 'Ready',
@@ -60,11 +60,11 @@ const projects = [
   },
   {
     id: 5,
-    name: 'SSR Green Valley',
-    location: 'Chennai',
-    image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80',
+    name: 'SSR Advam Residency',
+    location: 'Bangalore',
+    image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774871826/2.jpg_o6e9rf.jpg',
     status: 'New Launch',
-    price: '₹35L - ₹75L',
+    price: 'starting from ₹ 1Cr',
     type: 'Apartments',
     units: '150 Units',
     completion: 'Dec 2027',
@@ -117,11 +117,15 @@ export default function Projects() {
               Our Portfolio
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
-              Our Projects
+              Top Affordable & Luxury Projects in Bangalore
             </h2>
+            <p className="text-gray-500 mt-3 max-w-2xl text-base">
+              Discover a wide range of individual houses, plots, and residential sites — trusted by
+              hundreds of happy homeowners across Bangalore.
+            </p>
           </div>
-          
-          <div className="flex gap-2">
+
+          <div className="flex gap-2 shrink-0">
             <Button
               variant="outline"
               size="icon"
@@ -140,6 +144,19 @@ export default function Projects() {
             </Button>
           </div>
         </motion.div>
+
+        {/* Intro Text */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="text-gray-500 text-sm max-w-3xl mb-10 leading-relaxed"
+        >
+          Bangalore's rapid growth as an investment hub has surged demand for quality housing. Whether
+          you envision a luxurious home, an elegant plot, or a well-planned development — SSR Properties
+          offers premium and affordable residential projects that blend comfort, convenience, and modern
+          elegance. Your dream home is now within reach.
+        </motion.p>
 
         {/* Horizontal Scroll Container */}
         <div className="relative">
@@ -164,7 +181,7 @@ export default function Projects() {
                 whileHover={{ y: -10 }}
                 className="min-w-[350px] sm:min-w-[400px] snap-start"
               >
-                <div 
+                <div
                   className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer group h-full"
                   onClick={() => setSelectedProject(project)}
                 >
@@ -177,9 +194,9 @@ export default function Projects() {
                       loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                    
+
                     {/* Status Badge */}
-                    <Badge 
+                    <Badge
                       className={`absolute top-4 left-4 ${getStatusColor(project.status)} text-white border-0`}
                     >
                       {project.status}
@@ -196,7 +213,7 @@ export default function Projects() {
                     <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-[#c89b3c] transition-colors">
                       {project.name}
                     </h3>
-                    
+
                     <div className="flex items-center text-gray-500 text-sm mb-4">
                       <MapPin className="w-4 h-4 mr-1 text-[#c89b3c]" />
                       {project.location}
@@ -213,8 +230,8 @@ export default function Projects() {
                       </span>
                     </div>
 
-                    <Button 
-                      variant="ghost" 
+                    <Button
+                      variant="ghost"
                       className="w-full text-[#c89b3c] hover:bg-[#c89b3c]/10 group/btn"
                     >
                       View Details
@@ -236,14 +253,14 @@ export default function Projects() {
               <DialogHeader>
                 <DialogTitle className="text-2xl font-bold">{selectedProject.name}</DialogTitle>
               </DialogHeader>
-              
+
               <div className="mt-4">
                 <img
                   src={selectedProject.image}
                   alt={selectedProject.name}
                   className="w-full h-64 object-cover rounded-xl mb-6"
                 />
-                
+
                 <div className="flex flex-wrap gap-2 mb-4">
                   <Badge className={getStatusColor(selectedProject.status)}>
                     {selectedProject.status}
@@ -269,7 +286,7 @@ export default function Projects() {
                   <h4 className="font-semibold mb-3">Key Features</h4>
                   <div className="flex flex-wrap gap-2">
                     {selectedProject.features.map((feature) => (
-                      <span 
+                      <span
                         key={feature}
                         className="flex items-center gap-1 bg-[#c89b3c]/10 text-[#c89b3c] px-3 py-1 rounded-full text-sm"
                       >
@@ -280,7 +297,7 @@ export default function Projects() {
                   </div>
                 </div>
 
-                <Button 
+                <Button
                   onClick={() => {
                     setSelectedProject(null)
                     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })

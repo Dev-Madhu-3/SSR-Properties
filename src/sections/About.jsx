@@ -1,13 +1,12 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { CheckCircle, Award, Users, Building2, TrendingUp, Shield } from 'lucide-react'
+import { CheckCircle, Award, Users, Building2, TrendingUp, Shield, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 const features = [
   '24/7 Security & Gated Community',
-  '25, 30 & 35 ft Asphalt Roads',
+  '25, 30, 35 & 40 ft Asphalt Roads',
   'Integrated Drainage System',
-  'Borewell Water Supply',
   'East, West & North Facing Homes',
   'Rainwater Harvesting',
 ]
@@ -16,26 +15,26 @@ const values = [
   {
     icon: Award,
     title: 'Quality First',
-    description: 'We never compromise on construction quality and materials.',
+    description: 'We never compromise on construction quality, materials, or finish.',
   },
   {
     icon: Users,
     title: 'Customer Centric',
-    description: 'Your satisfaction is our top priority at every step.',
+    description: 'Creating spaces where families can live, grow, and build their future.',
   },
   {
     icon: Shield,
     title: 'Transparency',
-    description: 'Clear documentation and honest pricing always.',
+    description: 'Legally approved properties with clear documentation and honest pricing.',
   },
   {
     icon: TrendingUp,
-    title: 'Innovation',
-    description: 'Modern designs with smart home technology.',
+    title: 'Long-Term Value',
+    description: 'Sustainable developments that enhance quality of life and investment potential.',
   },
 ]
 
-export default function About() {
+export default function About({ onViewAbout }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
@@ -61,11 +60,12 @@ export default function About() {
             About Us
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            Building Dreams, Delivering Trust
+            Building Trust, Creating Value, Shaping Your Future
           </h2>
           <p className="text-gray-600 max-w-3xl mx-auto text-lg">
-            SSR Properties is a leading real estate developer with projects across top Indian cities, 
-            focusing on sustainability, luxury, and community living.
+            SSR Properties is committed to shaping modern lifestyles through thoughtfully developed
+            residential layouts and farmland projects — focused on quality, transparency, and
+            lasting customer satisfaction.
           </p>
         </motion.div>
 
@@ -80,15 +80,15 @@ export default function About() {
           >
             <div className="relative rounded-3xl overflow-hidden shadow-2xl">
               <img
-                src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
+                src="https://res.cloudinary.com/djuoignk5/image/upload/v1774843910/SSR_Villa_q25pqw.png"
                 alt="SSR Properties"
                 className="w-full h-[500px] object-cover"
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
             </div>
-            
-            {/* Experience Badge */}
+
+            {/* Established Badge */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
@@ -96,8 +96,8 @@ export default function About() {
               className="absolute -bottom-8 -right-8 bg-gradient-to-br from-[#c89b3c] to-[#e6c66a] rounded-2xl p-6 shadow-xl"
             >
               <div className="text-white text-center">
-                <div className="text-4xl font-bold">10+</div>
-                <div className="text-sm opacity-90">Years of Excellence</div>
+                <div className="text-4xl font-bold">2021</div>
+                <div className="text-sm opacity-90">Est. with Trust</div>
               </div>
             </motion.div>
 
@@ -115,7 +115,7 @@ export default function About() {
               SSR Properties
             </h3>
             <p className="text-[#c89b3c] font-medium mb-4">
-              "Innovation in Every Brick"
+              "A home is more than a structure — it's the foundation of dreams, comfort, and lasting memories."
             </p>
             <p className="text-gray-500 mb-6 flex items-center gap-2">
               <Building2 className="w-5 h-5 text-[#c89b3c]" />
@@ -124,14 +124,16 @@ export default function About() {
 
             <div className="space-y-4 text-gray-600 mb-8">
               <p>
-                Since our inception in 2021, SSR Properties has been shaping modern living through 
-                quality developments and customer-centric service. We believe that every home is more 
-                than just a structure — it's the foundation of dreams, comfort, and a better future.
+                Established in 2021, SSR Properties has been committed to shaping modern lifestyles
+                through well-planned residential layouts and farmland projects. We focus on delivering
+                legally approved properties and affordable investment opportunities — with clear
+                documentation and peace of mind for every buyer.
               </p>
               <p>
-                We specialize in residential plots, individual houses, and housing developments with 
-                a strong focus on quality, transparency, and customer satisfaction. Our projects are 
-                designed to provide the perfect blend of luxury, comfort, and sustainability.
+                With trusted experience in the real estate industry, we have built a reputation as a
+                reliable, customer-focused developer. Our projects offer modern infrastructure,
+                long-term value, and vibrant communities — dedicated to enhancing the quality of life
+                while providing excellent investment potential.
               </p>
             </div>
 
@@ -151,12 +153,22 @@ export default function About() {
               ))}
             </div>
 
-            <Button
-              onClick={scrollToProjects}
-              className="h-12 px-8 bg-gradient-to-r from-[#c89b3c] to-[#e6c66a] hover:from-[#b88a2d] hover:to-[#d5b559] text-white font-semibold rounded-full"
-            >
-              Explore Projects
-            </Button>
+            {/* Buttons */}
+            <div className="flex gap-4 flex-wrap">
+              <Button
+                onClick={scrollToProjects}
+                className="h-12 px-8 bg-gradient-to-r from-[#c89b3c] to-[#e6c66a] hover:from-[#b88a2d] hover:to-[#d5b559] text-white font-semibold rounded-full"
+              >
+                Explore Projects
+              </Button>
+              <Button
+                onClick={() => onViewAbout && onViewAbout()}
+                className="h-12 px-8 bg-gradient-to-r from-[#c89b3c] to-[#e6c66a] hover:from-[#b88a2d] hover:to-[#d5b559] text-white font-semibold rounded-full"
+              >
+                Learn More
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            </div>
           </motion.div>
         </div>
 
