@@ -44,7 +44,7 @@ const properties = [
     image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774967552/Lakeview_b99xxs.png',
     title: 'SSR Sri Lakshmi Lakeview Enclave',
     location: 'Kr puram, Bangalore',
-    price: 'starting from ₹1 Cr',
+    price: '₹1 Cr onwards',
     beds: 3,
     baths: 3,
     sqft: '1,200',
@@ -54,7 +54,7 @@ const properties = [
     image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774809635/SSR_img_f98wby.jpg',
     title: 'Future Project',
     location: 'Kr puram, Bangalore',
-    price: 'starting from ₹1 Cr',
+    price: '₹1 Cr onwards',
     beds: 4,
     baths: 3,
     sqft: '1,200',
@@ -64,7 +64,7 @@ const properties = [
     image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774871827/Farmlands.jpg_1_rwbi4u.jpg',
     title: 'Smart Home Villa - Future',
     location: 'Kr puram, Bangalore',
-    price: 'starting from ₹1 Cr',
+    price: '₹1 Cr onwards',
     beds: 3,
     baths: 2,
     sqft: '1,200',
@@ -102,8 +102,8 @@ export default function FeaturedSlider() {
       {/* Infinite Scroll Slider */}
       <div className="relative">
         {/* Gradient Masks */}
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-gray-50 to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+        {/* <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-gray-50 to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" /> */}
 
         <motion.div
           initial={{ opacity: 0 }}
