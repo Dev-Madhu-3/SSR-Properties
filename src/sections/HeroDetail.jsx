@@ -11,7 +11,7 @@ const featuredProjects = [
     price: '₹85L onwards',
     rating: 4.9,
     image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774809091/Signature_Gardenia_SSR_uueh2e.jpg',
-    status: 'Featured',
+    status: 'On going',
     description: 'Luxury premium residential project with world-class amenities',
   },
   {
@@ -35,9 +35,9 @@ const featuredProjects = [
 ]
 
 const achievements = [
-  { value: '50+', label: 'Projects Completed', icon: Home },
-  { value: '2000+', label: 'Happy Families', icon: Users },
-  { value: '10+', label: 'Years Experience', icon: Award },
+  { value: '20+', label: 'Projects Completed', icon: Home },
+  { value: '1000+', label: 'Happy Families', icon: Users },
+  { value: '5+', label: 'Years Experience', icon: Award },
   { value: '100%', label: 'Customer Satisfaction', icon: Star },
 ]
 
@@ -121,7 +121,7 @@ export default function HeroDetail({ onBack }) {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mb-16"
         >
-          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">Featured Projects</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">Our Projects</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {featuredProjects.map((project, index) => (
               <motion.div
@@ -171,12 +171,12 @@ export default function HeroDetail({ onBack }) {
                     <div>
                       <div className="text-2xl font-bold text-gray-900">{project.price}</div>
                     </div>
-                    <Button
+                    {/* <Button
                       onClick={() => handleViewProject(project.name)}
                       className="bg-[#c89b3c] text-white hover:bg-[#b8891e] rounded-full px-6 py-2"
                     >
                       View
-                    </Button>
+                    </Button> */}
                   </div>
                 </div>
               </motion.div>

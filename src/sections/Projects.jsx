@@ -9,8 +9,8 @@ const projects = [
   {
     id: 1,
     name: 'SSR signature Gardenia',
-    location: 'Bangalore',
-    image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774843910/SSR_Villa_q25pqw.png',
+    location: 'Near East Point College (Back Gate), Kithaganur - Bidarahalli Main Road, Bangalore - 560049',
+    image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774809091/Signature_Gardenia_SSR_uueh2e.jpg',
     status: 'On Going',
     price: '₹1Cr-₹1.5Cr',
     type: 'Villas & Plots',
@@ -22,8 +22,8 @@ const projects = [
   {
     id: 2,
     name: 'SSR Green Farms',
-    location: 'Bangalore',
-    image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774809635/SSR_img_f98wby.jpg',
+    location: 'NH75, Mulbagal, Kolar',
+    image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774846011/SSR_FarmLands_ne05hu.png',
     status: 'On Going',
     price: 'Starting from ₹45L onwards',
     type: 'FarmLands with amenities',

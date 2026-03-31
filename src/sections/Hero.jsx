@@ -4,9 +4,9 @@ import { ArrowRight, Play, TrendingUp, Shield, Home } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 const stats = [
-  { value: '50+', label: 'Projects Completed', icon: Home },
-  { value: '2000+', label: 'Happy Families', icon: TrendingUp },
-  { value: '10+', label: 'Years Experience', icon: Shield },
+  { value: '20+', label: 'Projects Completed', icon: Home },
+  { value: '1000+', label: 'Happy Families', icon: TrendingUp },
+  { value: '5+', label: 'Years Experience', icon: Shield },
 ]
 
 const heroImages = [
@@ -197,7 +197,7 @@ export default function Hero({ onViewHero }) {
                 </div>
                 <div className="flex justify-between items-center">
                   <div className="text-white">
-                    <span className="text-2xl font-bold">₹85L</span>
+                    <span className="text-2xl font-bold">₹1 CR</span>
                     <span className="text-white/60 text-sm"> onwards</span>
                   </div>
                   <Button
@@ -212,7 +212,7 @@ export default function Hero({ onViewHero }) {
               </motion.div>
 
               {/* Floating Badge */}
-              <motion.div
+              {/* <motion.div
                 animate={{ y: [0, 10, 0] }}
                 transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
                 className="absolute -bottom-6 -left-6 bg-gradient-to-r from-[#c89b3c] to-[#e6c66a] rounded-2xl p-4 shadow-xl"
@@ -221,7 +221,7 @@ export default function Hero({ onViewHero }) {
                   <div className="text-2xl font-bold">4.9</div>
                   <div className="text-xs opacity-90">Customer Rating</div>
                 </div>
-              </motion.div>
+              </motion.div> */}
             </div>
           </motion.div>
         </div>
