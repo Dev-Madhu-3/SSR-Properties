@@ -33,7 +33,7 @@ const contactInfo = [
   {
     icon: MapPin,
     title: "Address",
-    details: ["Kithaganuru, KR Puram", "Bangalore - 560036"],
+    details: ["3rd floor, RNX Complex, Tc Palya main road, Anadapura circle, opp. Bharat petrol pump , Kithaganuru, KR Puram",  "Bangalore - 560036"],
     color: "from-green-500 to-green-600",
   },
   {

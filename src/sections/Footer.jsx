@@ -85,7 +85,7 @@ export default function Footer() {
             <div className="space-y-3 mb-6">
               <div className="flex items-center gap-3 text-gray-400">
                 <Phone className="w-5 h-5 text-[#c89b3c]" />
-                <span>+91 9632616633</span>
+                <span>+91 9632616633x`</span>
               </div>
               <div className="flex items-center gap-3 text-gray-400">
                 <Mail className="w-5 h-5 text-[#c89b3c]" />
@@ -93,7 +93,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-3 text-gray-400">
                 <MapPin className="w-5 h-5 text-[#c89b3c]" />
-                <span>Kithaganuru, KR Puram, Bangalore</span>
+                <span> 3rd floor, RNX Complex, Tc Palya main road, Anadapura circle, opp. Bharat petrol pump, Bengaluru, Karnataka - 560036</span>
               </div>
             </div>
 

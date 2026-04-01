@@ -14,15 +14,14 @@ const amenities = [
   { icon: Car, label: 'Parking' },
   { icon: Trees, label: 'Parks' },
   { icon: Waves, label: 'Swimming Pool' },
-  { icon: Dumbbell, label: 'Gym' },
   { icon: Maximize, label: 'Club House' },
 ]
 
 const highlights = [
-  '10 acres gated community with 225 houses & plots',
+  '11 acres gated community with 260 houses & plots',
   '25, 30, 35 & 40 ft Asphalt Roads',
   'Integrated Drainage System',
-  'East, West & North Facing Homes',
+  'East, West & North , South Facing Homes',
   'Underground Electrical Cabling',
   'Street Lighting',
   'Children Play Area',
@@ -108,7 +107,7 @@ export default function ProjectDetail() {
 
     try {
       const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID'
-      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID'
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID_CONTACT_FORM || 'YOUR_TEMPLATE_ID'
       const userId = import.meta.env.VITE_EMAILJS_USER_ID || 'YOUR_USER_ID'
 
       await emailjs.send(
@@ -121,7 +120,7 @@ export default function ProjectDetail() {
           date: formData.date,
           project: formData.projectName,
           message: formData.message,
-          to_email: 'yanamalaveera01@gmail.com, surendraoffline@gmail.com, sales@ssrproperties.in, info@ssrproperties.in',
+          to_email: 'sales@ssrproperties.in, info@ssrproperties.in',
         },
         userId
       )
@@ -130,7 +129,7 @@ export default function ProjectDetail() {
       toast.success('Thank you! We will contact you within 24 hours.')
       
       // Open brochure in new tab
-      window.open('/Gundur Brochure_17-06-23 (1).pdf', '_blank')
+      window.open('SSR-SIGNATURE-GARDENIA-Broucher-AW.pdf', '_blank')
       
       setTimeout(() => {
         setShowBrochureModal(false)
@@ -182,7 +181,7 @@ export default function ProjectDetail() {
 
             <p className="text-gray-600 mb-8 leading-relaxed">
               Experience the perfect blend of modern lifestyle and natural tranquility at SSR Signature Gardenia.
-              Spread across 10 acres, this gated community offers 225 meticulously designed houses and plots
+              Spread across 11 acres, this gated community offers 260 meticulously designed houses and plots
               with world-class amenities that cater to every aspect of contemporary living.
             </p>
 
@@ -226,7 +225,7 @@ export default function ProjectDetail() {
                 className="h-12 px-8 bg-gradient-to-r from-[#c89b3c] to-[#e6c66a] hover:from-[#b88a2d] hover:to-[#d5b559] text-white font-semibold rounded-full"
               >
                 <Home className="w-5 h-5 mr-2" />
-                Book Site Visit
+                Get In Touch
               </Button>
               <Button
                 onClick={() => setShowBrochureModal(true)}

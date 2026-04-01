@@ -7,7 +7,7 @@ const features = [
   '24/7 Security & Gated Community',
   '25, 30, 35 & 40 ft Asphalt Roads',
   'Integrated Drainage System',
-  'East, West & North Facing Homes',
+  'East, West & North , South Facing Homes',
   'Rainwater Harvesting',
 ]
 
@@ -119,7 +119,7 @@ export default function About({ onViewAbout }) {
             </p>
             <p className="text-gray-500 mb-6 flex items-center gap-2">
               <Building2 className="w-5 h-5 text-[#c89b3c]" />
-              Kithaganuru, KR Puram, Bangalore
+              3rd floor, RNX Complex, Tc Palya main road, Anadapura circle, opp. Bharat petrol pump, Bengaluru, Karnataka - 560036
             </p>
 
             <div className="space-y-4 text-gray-600 mb-8">

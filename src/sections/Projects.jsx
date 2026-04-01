@@ -95,7 +95,8 @@ export default function Projects() {
         >
           Bangalore's rapid growth as an investment hub has surged demand for
           quality housing. Whether you envision a luxurious home, an elegant
-          plot, or a well-planned development — SSR Properties offers premium
+          plot, or a well-planned development — SSR Propertie
+           offers premium
           and affordable residential projects that blend comfort, convenience,
           and modern elegance. Your dream home is now within reach.
         </motion.p>

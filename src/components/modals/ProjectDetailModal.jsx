@@ -43,10 +43,10 @@ const ProjectDetailModal = () => {
   // Generate additional images for the carousel
   const projectImages = project ? [
     project.image,
-    `https://picsum.photos/seed/${project.name}1/1200/800.jpg`,
-    `https://picsum.photos/seed/${project.name}2/1200/800.jpg`,
-    `https://picsum.photos/seed/${project.name}3/1200/800.jpg`,
-    `https://picsum.photos/seed/${project.name}4/1200/800.jpg`,
+    `https://res.cloudinary.com/djuoignk5/image/upload/v1774871829/6.jpg_cltvxt.jpg`,
+    `https://res.cloudinary.com/djuoignk5/image/upload/v1774871826/24.jpg_2_ks6ipn.jpg`,
+    `https://res.cloudinary.com/djuoignk5/image/upload/v1774871825/h6.jpg_zxqqig.jpg`,
+    `https://res.cloudinary.com/djuoignk5/image/upload/v1774809539/SSR_Signature_Gardenia_vf7jd4.jpg`,
   ] : [];
 
   useEffect(() => {
@@ -411,16 +411,15 @@ const ProjectDetailModal = () => {
                     </p>
                     <div className="flex items-center justify-between text-sm text-gray-300">
                       <div className="flex items-center">
-                        <Bed className="w-4 h-4 mr-1" />
-                        <span>4</span>
+                        
+                        
                       </div>
                       <div className="flex items-center">
-                        <Bath className="w-4 h-4 mr-1" />
-                        <span>4</span>
+                       
+                        
                       </div>
                       <div className="flex items-center">
-                        <Square className="w-4 h-4 mr-1" />
-                        <span>Private</span>
+                  
                       </div>
                     </div>
                   </div>
@@ -481,7 +480,7 @@ const ProjectDetailModal = () => {
               </motion.div>
 
               {/* Virtual Tour */}
-              <motion.div
+              {/* <motion.div
                 variants={itemVariants}
                 className="bg-gradient-to-br from-blue-500/20 to-blue-600/10 backdrop-blur-md p-6 rounded-2xl border border-blue-500/20"
               >
@@ -502,7 +501,7 @@ const ProjectDetailModal = () => {
                     </motion.button>
                   </div>
                 </div>
-              </motion.div>
+              </motion.div> */}
 
               {/* CTA Section */}
               <motion.div

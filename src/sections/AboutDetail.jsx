@@ -120,7 +120,7 @@ export default function AboutDetail({ onBack }) {
               <h3 className="text-2xl font-bold text-gray-900 mb-2">SSR Properties</h3>
               <div className="flex items-center gap-2 text-gray-600 mb-4">
                 <MapPin className="w-5 h-5 text-[#c89b3c]" />
-                <span>Kithaganuru, KR Puram, Bangalore</span>
+                <span>3rd floor, RNX Complex, Tc Palya main road, Anadapura circle, opp. Bharat petrol pump, Bengaluru, Karnataka - 560036</span>
               </div>
               <p className="text-lg text-[#c89b3c] font-semibold mb-4 italic">
                 "A home is more than a structure — it's the foundation of dreams, comfort, and lasting memories."
