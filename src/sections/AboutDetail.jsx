@@ -132,7 +132,8 @@ export default function AboutDetail({ onBack }) {
             <p>
               Established in 2021, SSR Properties has been committed to shaping modern lifestyles
               through well-planned residential layouts and farmland projects. We focus on delivering
-              legally approved properties and affordable investment opportunities — with clear
+              legally approved properties and affordable investment opportunities — with c
+              
               documentation and peace of mind for every buyer.
             </p>
             <p>

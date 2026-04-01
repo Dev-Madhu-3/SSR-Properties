@@ -467,9 +467,9 @@ export default function ProjectDetail() {
                         className={`h-10 w-full border border-gray-300 rounded-lg px-3 focus:border-amber-500 focus:ring-amber-500 focus:outline-none transition-all duration-300 text-sm ${errors.projectName ? 'border-red-500' : ''}`}
                       >
                         <option value="">Choose a project</option>
-                        <option value="Prestige Estates">Prestige Estates</option>
-                        <option value="Royal Heights">Royal Heights</option>
-                        <option value="Luxury Square">Luxury Square</option>
+                        <option value="SSR Signature Gardenia">SSR Signature Gardenia</option>
+                        <option value="SSR Green Farms">SSR Green Farms</option>
+                        <option value="SSR SK Signature">SSR SK Signature</option>
                       </select>
                       {errors.projectName && (
                         <motion.p 

@@ -127,7 +127,6 @@ const ProjectDetailModal = () => {
   const amenityIcons = {
     "High-Speed Internet": Wifi,
     Parking: Car,
-    Gym: Dumbbell,
     Garden: Trees,
     Security: Shield,
     "Power Backup": Zap,
@@ -138,7 +137,6 @@ const ProjectDetailModal = () => {
   const amenities = [
     "High-Speed Internet",
     "Parking",
-    "Gym",
     "Garden",
     "Security",
     "Power Backup",
@@ -406,10 +404,10 @@ const ProjectDetailModal = () => {
                       <span className="text-purple-500 font-bold">Premium</span>
                     </div>
                     <h4 className="text-white font-bold text-lg mb-1">
-                      Villas
+                      Individual Houses & Plots
                     </h4>
                     <p className="text-gray-400 text-sm mb-3">
-                      2,500 - 3,500 sq.ft
+                      800 - 1800 sq.ft
                     </p>
                     <div className="flex items-center justify-between text-sm text-gray-300">
                       <div className="flex items-center">
