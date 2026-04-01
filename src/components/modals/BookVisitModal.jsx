@@ -53,7 +53,8 @@ const BookVisitModal = () => {
     if (!formData.phone.trim()) {
       newErrors.phone = "Phone number is required";
     } else if (!/^[0-9\+\-\s\(\)]{10,}$/.test(formData.phone)) {
-      newErrors.phone = "Phone number must contain only digits and be at least 10 characters";
+      newErrors.phone =
+        "Phone number must contain only digits and be at least 10 characters";
     }
 
     // Email validation
@@ -86,7 +87,7 @@ const BookVisitModal = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Validate form
     const newErrors = validateForm();
     if (Object.keys(newErrors).length > 0) {
@@ -98,28 +99,32 @@ const BookVisitModal = () => {
     setIsSubmitting(true);
 
     try {
-      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || "YOUR_SERVICE_ID";
-      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "YOUR_TEMPLATE_ID";
+      const serviceId =
+        import.meta.env.VITE_EMAILJS_SERVICE_ID || "YOUR_SERVICE_ID";
+      const templateId =
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID_CONTACT_FORM ||
+        "YOUR_TEMPLATE_ID";
       const userId = import.meta.env.VITE_EMAILJS_USER_ID || "YOUR_USER_ID";
 
       await emailjs.send(
         serviceId,
         templateId,
         {
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          date: formData.date,
-          project: formData.projectName,
-          message: formData.message,
-          to_email: "yanamalaveera01@gmail.com, surendraoffline@gmail.com, sales@ssrproperties.in, info@ssrproperties.in",
+          name: formData.name || "",
+          email: formData.email || "",
+          phone: formData.phone || "",
+          preferred_date: formData.date || "",
+          project_name: formData.projectName || "",
+          message: formData.message || "",
+          time: new Date().toLocaleString("en-IN"),
+          to_email: "sales@ssrproperties.in, info@ssrproperties.in",
         },
-        userId
+        userId,
       );
 
       setIsSuccess(true);
       toast.success("Thank you! We will contact you within 24 hours.");
-      
+
       setTimeout(() => {
         closeModal("bookVisit");
         setIsSuccess(false);
@@ -142,9 +147,9 @@ const BookVisitModal = () => {
     <div className="relative bg-white rounded-2xl shadow-2xl overflow-hidden max-w-md mx-auto max-h-[85vh] flex flex-col">
       {/* Background gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-amber-50/50 to-orange-50/50 pointer-events-none"></div>
-      
+
       {/* Header */}
-      <motion.div 
+      <motion.div
         className="relative bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 p-6 text-white"
         initial={{ height: "auto" }}
         animate={{ height: "auto" }}
@@ -155,9 +160,9 @@ const BookVisitModal = () => {
         >
           <X className="w-4 h-4" />
         </button>
-        
+
         <div className="relative z-10">
-          <motion.div 
+          <motion.div
             className="flex items-center mb-1"
             initial={{ opacity: 0, x: -15 }}
             animate={{ opacity: 1, x: 0 }}
@@ -166,7 +171,7 @@ const BookVisitModal = () => {
             <Building className="w-6 h-6 mr-2" />
             <h2 className="text-2xl font-bold">Book Your Site Visit</h2>
           </motion.div>
-          <motion.p 
+          <motion.p
             className="text-white/90 text-sm ml-8"
             initial={{ opacity: 0, x: -15 }}
             animate={{ opacity: 1, x: 0 }}
@@ -193,7 +198,12 @@ const BookVisitModal = () => {
                 className="relative inline-flex justify-center items-center w-16 h-16 mb-4"
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                transition={{ delay: 0.2, type: "spring", stiffness: 200, damping: 15 }}
+                transition={{
+                  delay: 0.2,
+                  type: "spring",
+                  stiffness: 200,
+                  damping: 15,
+                }}
               >
                 <div className="absolute inset-0 bg-green-500 rounded-full opacity-20 animate-ping"></div>
                 <div className="relative bg-green-500 rounded-full w-16 h-16 flex items-center justify-center">
@@ -204,7 +214,8 @@ const BookVisitModal = () => {
                 Thank You!
               </h3>
               <p className="text-gray-600 text-sm max-w-sm">
-                We've received your booking request. We'll contact you within 24 hours to confirm your site visit.
+                We've received your booking request. We'll contact you within 24
+                hours to confirm your site visit.
               </p>
             </motion.div>
           ) : (
@@ -219,7 +230,10 @@ const BookVisitModal = () => {
             >
               {/* Full Name Field */}
               <div>
-                <Label htmlFor="name" className="text-gray-700 font-medium text-sm block mb-2">
+                <Label
+                  htmlFor="name"
+                  className="text-gray-700 font-medium text-sm block mb-2"
+                >
                   Full Name *
                 </Label>
                 <Input
@@ -228,11 +242,11 @@ const BookVisitModal = () => {
                   type="text"
                   value={formData.name}
                   onChange={handleInputChange}
-                  className={`h-10 w-full border-gray-300 focus:border-amber-500 focus:ring-amber-500 transition-all duration-300 ${errors.name ? 'border-red-500' : ''}`}
+                  className={`h-10 w-full border-gray-300 focus:border-amber-500 focus:ring-amber-500 transition-all duration-300 ${errors.name ? "border-red-500" : ""}`}
                   placeholder="Enter your full name"
                 />
                 {errors.name && (
-                  <motion.p 
+                  <motion.p
                     className="text-red-500 text-xs mt-1.5 flex items-center"
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -246,7 +260,10 @@ const BookVisitModal = () => {
 
               {/* Project Name Field */}
               <div>
-                <Label htmlFor="projectName" className="text-gray-700 font-medium text-sm block mb-2">
+                <Label
+                  htmlFor="projectName"
+                  className="text-gray-700 font-medium text-sm block mb-2"
+                >
                   Select Project *
                 </Label>
                 <select
@@ -254,15 +271,17 @@ const BookVisitModal = () => {
                   name="projectName"
                   value={formData.projectName}
                   onChange={handleInputChange}
-                  className={`h-10 w-full border border-gray-300 rounded-lg px-3 focus:border-amber-500 focus:ring-amber-500 focus:outline-none transition-all duration-300 text-sm ${errors.projectName ? 'border-red-500' : ''}`}
+                  className={`h-10 w-full border border-gray-300 rounded-lg px-3 focus:border-amber-500 focus:ring-amber-500 focus:outline-none transition-all duration-300 text-sm ${errors.projectName ? "border-red-500" : ""}`}
                 >
                   <option value="">Choose a project</option>
-                  <option value="SSR SIGNATURE GARDENIA">SSR SIGNATURE GARDENIA</option>
+                  <option value="SSR SIGNATURE GARDENIA">
+                    SSR SIGNATURE GARDENIA
+                  </option>
                   <option value="SSR GREEN FARMS">SSR GREEN FARMS</option>
                   <option value="SSR SK SIGNATURE">SSR SK SIGNATURE</option>
                 </select>
                 {errors.projectName && (
-                  <motion.p 
+                  <motion.p
                     className="text-red-500 text-xs mt-1.5 flex items-center"
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -276,8 +295,12 @@ const BookVisitModal = () => {
 
               {/* Phone Number Field */}
               <div>
-                <Label htmlFor="phone" className="text-gray-700 font-medium text-sm block mb-2">
-                  Phone Number * <span className="text-gray-400 text-xs">(digits only)</span>
+                <Label
+                  htmlFor="phone"
+                  className="text-gray-700 font-medium text-sm block mb-2"
+                >
+                  Phone Number *{" "}
+                  <span className="text-gray-400 text-xs">(digits only)</span>
                 </Label>
                 <Input
                   id="phone"
@@ -285,11 +308,11 @@ const BookVisitModal = () => {
                   type="tel"
                   value={formData.phone}
                   onChange={handleInputChange}
-                  className={`h-10 w-full border-gray-300 focus:border-amber-500 focus:ring-amber-500 transition-all duration-300 ${errors.phone ? 'border-red-500' : ''}`}
+                  className={`h-10 w-full border-gray-300 focus:border-amber-500 focus:ring-amber-500 transition-all duration-300 ${errors.phone ? "border-red-500" : ""}`}
                   placeholder="10 digits minimum"
                 />
                 {errors.phone && (
-                  <motion.p 
+                  <motion.p
                     className="text-red-500 text-xs mt-1.5 flex items-center"
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -303,7 +326,10 @@ const BookVisitModal = () => {
 
               {/* Email Field */}
               <div>
-                <Label htmlFor="email" className="text-gray-700 font-medium text-sm block mb-2">
+                <Label
+                  htmlFor="email"
+                  className="text-gray-700 font-medium text-sm block mb-2"
+                >
                   Email Address *
                 </Label>
                 <Input
@@ -312,11 +338,11 @@ const BookVisitModal = () => {
                   type="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className={`h-10 w-full border-gray-300 focus:border-amber-500 focus:ring-amber-500 transition-all duration-300 ${errors.email ? 'border-red-500' : ''}`}
+                  className={`h-10 w-full border-gray-300 focus:border-amber-500 focus:ring-amber-500 transition-all duration-300 ${errors.email ? "border-red-500" : ""}`}
                   placeholder="your@email.com"
                 />
                 {errors.email && (
-                  <motion.p 
+                  <motion.p
                     className="text-red-500 text-xs mt-1.5 flex items-center"
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -330,7 +356,10 @@ const BookVisitModal = () => {
 
               {/* Date Field */}
               <div>
-                <Label htmlFor="date" className="text-gray-700 font-medium text-sm block mb-2">
+                <Label
+                  htmlFor="date"
+                  className="text-gray-700 font-medium text-sm block mb-2"
+                >
                   Preferred Date
                 </Label>
                 <Input
@@ -346,7 +375,10 @@ const BookVisitModal = () => {
 
               {/* Message Field */}
               <div>
-                <Label htmlFor="message" className="text-gray-700 font-medium text-sm block mb-2">
+                <Label
+                  htmlFor="message"
+                  className="text-gray-700 font-medium text-sm block mb-2"
+                >
                   Message
                 </Label>
                 <Textarea

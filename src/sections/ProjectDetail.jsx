@@ -108,7 +108,9 @@ export default function ProjectDetail() {
 
     try {
       const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID'
-      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID'
+      const templateId =
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID_CONTACT_FORM ||
+        "YOUR_TEMPLATE_ID";
       const userId = import.meta.env.VITE_EMAILJS_USER_ID || 'YOUR_USER_ID'
 
       await emailjs.send(

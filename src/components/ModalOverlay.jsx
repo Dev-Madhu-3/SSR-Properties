@@ -4,7 +4,6 @@ import { useModal } from "../contexts/ModalContext";
 import ProjectDetailModal from "./modals/ProjectDetailModal";
 import BlogDetailModal from "./modals/BlogDetailModal";
 import BookVisitModal from "./modals/BookVisitModal";
-import ContactFormModal from "./modals/ContactFormModal";
 
 const ModalOverlay = () => {
   const { modals, closeAllModals } = useModal();
@@ -19,8 +18,7 @@ const ModalOverlay = () => {
     <AnimatePresence>
       {(modals.projectDetail.isOpen ||
         modals.blogDetail.isOpen ||
-        modals.bookVisit.isOpen ||
-        modals.contactForm.isOpen) && (
+        modals.bookVisit.isOpen) && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

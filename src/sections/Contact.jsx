@@ -65,7 +65,8 @@ export default function Contact() {
     if (!formData.phone.trim()) {
       newErrors.phone = "Phone number is required";
     } else if (!/^[0-9\+\-\s\(\)]{10,}$/.test(formData.phone)) {
-      newErrors.phone = "Phone number must contain only digits and be at least 10 characters";
+      newErrors.phone =
+        "Phone number must contain only digits and be at least 10 characters";
     }
     if (!formData.email.trim()) {
       newErrors.email = "Email address is required";
@@ -94,7 +95,7 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Validate form
     const newErrors = validateForm();
     if (Object.keys(newErrors).length > 0) {
@@ -106,8 +107,11 @@ export default function Contact() {
     setIsSubmitting(true);
 
     try {
-      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || "YOUR_SERVICE_ID";
-      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID_2 || "template_contact_2";
+      const serviceId =
+        import.meta.env.VITE_EMAILJS_SERVICE_ID || "YOUR_SERVICE_ID";
+      const templateId =
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID_SEND_MESSAGE ||
+        "template_contact_2";
       const userId = import.meta.env.VITE_EMAILJS_USER_ID || "YOUR_USER_ID";
 
       await emailjs.send(
@@ -118,9 +122,10 @@ export default function Contact() {
           email: formData.email,
           phone: formData.phone,
           message: formData.message,
+          time: new Date().toLocaleString("en-IN"),
           to_email: "sales@ssrproperties.in, info@ssrproperties.in",
         },
-        userId
+        userId,
       );
 
       setIsSuccess(true);
@@ -137,7 +142,9 @@ export default function Contact() {
       }, 3000);
     } catch (error) {
       console.error("Email error:", error);
-      toast.error("Failed to send message. Please try again or contact us directly.");
+      toast.error(
+        "Failed to send message. Please try again or contact us directly.",
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -209,7 +216,8 @@ export default function Contact() {
                 Get In Touch
               </h3>
               <p className="text-gray-600 mb-6">
-                Ready to find your dream property? Let's discuss your requirements.
+                Ready to find your dream property? Let's discuss your
+                requirements.
               </p>
 
               <AnimatePresence mode="wait">
@@ -226,7 +234,12 @@ export default function Contact() {
                       className="relative inline-flex justify-center items-center w-16 h-16 mb-4"
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
-                      transition={{ delay: 0.2, type: "spring", stiffness: 200, damping: 15 }}
+                      transition={{
+                        delay: 0.2,
+                        type: "spring",
+                        stiffness: 200,
+                        damping: 15,
+                      }}
                     >
                       <div className="absolute inset-0 bg-green-500 rounded-full opacity-20 animate-ping"></div>
                       <div className="relative bg-green-500 rounded-full w-16 h-16 flex items-center justify-center">
@@ -237,7 +250,8 @@ export default function Contact() {
                       Message Sent Successfully!
                     </h4>
                     <p className="text-gray-600 text-sm">
-                      Thank you for contacting us. We'll get back to you within 24 hours.
+                      Thank you for contacting us. We'll get back to you within
+                      24 hours.
                     </p>
                   </motion.div>
                 ) : (
@@ -252,7 +266,10 @@ export default function Contact() {
                     {/* Full Name & Phone */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <Label htmlFor="name" className="text-gray-700 font-medium text-sm block mb-2">
+                        <Label
+                          htmlFor="name"
+                          className="text-gray-700 font-medium text-sm block mb-2"
+                        >
                           Full Name *
                         </Label>
                         <Input
@@ -261,11 +278,11 @@ export default function Contact() {
                           type="text"
                           value={formData.name}
                           onChange={handleInputChange}
-                          className={`h-10 w-full border-gray-300 focus:border-amber-500 focus:ring-amber-500 transition-all duration-300 ${errors.name ? 'border-red-500' : ''}`}
+                          className={`h-10 w-full border-gray-300 focus:border-amber-500 focus:ring-amber-500 transition-all duration-300 ${errors.name ? "border-red-500" : ""}`}
                           placeholder="Enter your full name"
                         />
                         {errors.name && (
-                          <motion.p 
+                          <motion.p
                             className="text-red-500 text-xs mt-1.5 flex items-center"
                             initial={{ opacity: 0, y: -10 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -277,8 +294,14 @@ export default function Contact() {
                         )}
                       </div>
                       <div>
-                        <Label htmlFor="phone" className="text-gray-700 font-medium text-sm block mb-2">
-                          Phone Number * <span className="text-gray-400 text-xs">(digits only)</span>
+                        <Label
+                          htmlFor="phone"
+                          className="text-gray-700 font-medium text-sm block mb-2"
+                        >
+                          Phone Number *{" "}
+                          <span className="text-gray-400 text-xs">
+                            (digits only)
+                          </span>
                         </Label>
                         <Input
                           id="phone"
@@ -286,11 +309,11 @@ export default function Contact() {
                           type="tel"
                           value={formData.phone}
                           onChange={handleInputChange}
-                          className={`h-10 w-full border-gray-300 focus:border-amber-500 focus:ring-amber-500 transition-all duration-300 ${errors.phone ? 'border-red-500' : ''}`}
+                          className={`h-10 w-full border-gray-300 focus:border-amber-500 focus:ring-amber-500 transition-all duration-300 ${errors.phone ? "border-red-500" : ""}`}
                           placeholder="10 digits minimum"
                         />
                         {errors.phone && (
-                          <motion.p 
+                          <motion.p
                             className="text-red-500 text-xs mt-1.5 flex items-center"
                             initial={{ opacity: 0, y: -10 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -305,7 +328,10 @@ export default function Contact() {
 
                     {/* Email */}
                     <div>
-                      <Label htmlFor="email" className="text-gray-700 font-medium text-sm block mb-2">
+                      <Label
+                        htmlFor="email"
+                        className="text-gray-700 font-medium text-sm block mb-2"
+                      >
                         Email Address *
                       </Label>
                       <Input
@@ -314,11 +340,11 @@ export default function Contact() {
                         type="email"
                         value={formData.email}
                         onChange={handleInputChange}
-                        className={`h-10 w-full border-gray-300 focus:border-amber-500 focus:ring-amber-500 transition-all duration-300 ${errors.email ? 'border-red-500' : ''}`}
+                        className={`h-10 w-full border-gray-300 focus:border-amber-500 focus:ring-amber-500 transition-all duration-300 ${errors.email ? "border-red-500" : ""}`}
                         placeholder="your@email.com"
                       />
                       {errors.email && (
-                        <motion.p 
+                        <motion.p
                           className="text-red-500 text-xs mt-1.5 flex items-center"
                           initial={{ opacity: 0, y: -10 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -332,7 +358,10 @@ export default function Contact() {
 
                     {/* Message */}
                     <div>
-                      <Label htmlFor="message" className="text-gray-700 font-medium text-sm block mb-2">
+                      <Label
+                        htmlFor="message"
+                        className="text-gray-700 font-medium text-sm block mb-2"
+                      >
                         Message *
                       </Label>
                       <Textarea
@@ -340,11 +369,11 @@ export default function Contact() {
                         name="message"
                         value={formData.message}
                         onChange={handleInputChange}
-                        className={`min-h-24 w-full border-gray-300 focus:border-amber-500 focus:ring-amber-500 resize-none transition-all duration-300 ${errors.message ? 'border-red-500' : ''}`}
+                        className={`min-h-24 w-full border-gray-300 focus:border-amber-500 focus:ring-amber-500 resize-none transition-all duration-300 ${errors.message ? "border-red-500" : ""}`}
                         placeholder="Tell us how we can help you..."
                       />
                       {errors.message && (
-                        <motion.p 
+                        <motion.p
                           className="text-red-500 text-xs mt-1.5 flex items-center"
                           initial={{ opacity: 0, y: -10 }}
                           animate={{ opacity: 1, y: 0 }}
