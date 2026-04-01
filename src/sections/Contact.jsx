@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import {
   Phone,
   Mail,
@@ -8,6 +8,7 @@ import {
   Send,
   CheckCircle,
   Loader2,
+  AlertCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -15,7 +16,6 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import emailjs from "emailjs-com";
-import { useModal } from "../contexts/ModalContext";
 
 const contactInfo = [
   {
@@ -33,13 +33,13 @@ const contactInfo = [
   {
     icon: MapPin,
     title: "Address",
-    details: ["Kithaganuru, KR Puram", "Bangalore - 560035"],
+    details: ["Kithaganuru, KR Puram", "Bangalore - 560036"],
     color: "from-green-500 to-green-600",
   },
   {
     icon: Clock,
     title: "Working Hours",
-    details: ["Mon - Sat: 9AM - 7PM", "Sunday: 10AM - 4PM"],
+    details: ["Mon - Sat: 9AM - 7PM", "Sunday: 10AM - 7PM"],
     color: "from-purple-500 to-purple-600",
   },
 ];
@@ -47,7 +47,101 @@ const contactInfo = [
 export default function Contact() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const { openModal } = useModal();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    message: "",
+  });
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.name.trim()) {
+      newErrors.name = "Full name is required";
+    }
+    if (!formData.phone.trim()) {
+      newErrors.phone = "Phone number is required";
+    } else if (!/^[0-9\+\-\s\(\)]{10,}$/.test(formData.phone)) {
+      newErrors.phone = "Phone number must contain only digits and be at least 10 characters";
+    }
+    if (!formData.email.trim()) {
+      newErrors.email = "Email address is required";
+    } else {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formData.email)) {
+        newErrors.email = "Please enter a valid email address";
+      }
+    }
+    if (!formData.message.trim()) {
+      newErrors.message = "Message is required";
+    }
+    return newErrors;
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: "" }));
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    // Validate form
+    const newErrors = validateForm();
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      toast.error("Please fill in all required fields correctly");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || "YOUR_SERVICE_ID";
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID_2 || "template_contact_2";
+      const userId = import.meta.env.VITE_EMAILJS_USER_ID || "YOUR_USER_ID";
+
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message,
+          to_email: "sales@ssrproperties.in, info@ssrproperties.in",
+        },
+        userId
+      );
+
+      setIsSuccess(true);
+      toast.success("Thank you! We'll get back to you soon.");
+      setTimeout(() => {
+        setIsSuccess(false);
+        setFormData({
+          name: "",
+          phone: "",
+          email: "",
+          message: "",
+        });
+        setErrors({});
+      }, 3000);
+    } catch (error) {
+      console.error("Email error:", error);
+      toast.error("Failed to send message. Please try again or contact us directly.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <section ref={ref} className="py-24 bg-gradient-to-b from-gray-50 to-white">
@@ -115,17 +209,174 @@ export default function Contact() {
                 Get In Touch
               </h3>
               <p className="text-gray-600 mb-6">
-                Ready to find your dream property? Let's discuss your
-                requirements.
+                Ready to find your dream property? Let's discuss your requirements.
               </p>
 
-              <Button
-                onClick={() => openModal("contactForm")}
-                className="w-full h-14 bg-gradient-to-r from-[#c89b3c] to-[#e6c66a] hover:from-[#b88a2d] hover:to-[#d5b559] text-white font-semibold rounded-xl text-lg"
-              >
-                <Send className="w-5 h-5 mr-2" />
-                Send Message
-              </Button>
+              <AnimatePresence mode="wait">
+                {isSuccess ? (
+                  <motion.div
+                    key="success"
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.8, opacity: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="text-center py-8"
+                  >
+                    <motion.div
+                      className="relative inline-flex justify-center items-center w-16 h-16 mb-4"
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ delay: 0.2, type: "spring", stiffness: 200, damping: 15 }}
+                    >
+                      <div className="absolute inset-0 bg-green-500 rounded-full opacity-20 animate-ping"></div>
+                      <div className="relative bg-green-500 rounded-full w-16 h-16 flex items-center justify-center">
+                        <CheckCircle className="w-8 h-8 text-white" />
+                      </div>
+                    </motion.div>
+                    <h4 className="text-xl font-bold text-gray-900 mb-2">
+                      Message Sent Successfully!
+                    </h4>
+                    <p className="text-gray-600 text-sm">
+                      Thank you for contacting us. We'll get back to you within 24 hours.
+                    </p>
+                  </motion.div>
+                ) : (
+                  <motion.form
+                    key="form"
+                    onSubmit={handleSubmit}
+                    className="space-y-5"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.4 }}
+                  >
+                    {/* Full Name & Phone */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="name" className="text-gray-700 font-medium text-sm block mb-2">
+                          Full Name *
+                        </Label>
+                        <Input
+                          id="name"
+                          name="name"
+                          type="text"
+                          value={formData.name}
+                          onChange={handleInputChange}
+                          className={`h-10 w-full border-gray-300 focus:border-amber-500 focus:ring-amber-500 transition-all duration-300 ${errors.name ? 'border-red-500' : ''}`}
+                          placeholder="Enter your full name"
+                        />
+                        {errors.name && (
+                          <motion.p 
+                            className="text-red-500 text-xs mt-1.5 flex items-center"
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.2 }}
+                          >
+                            <AlertCircle className="w-3 h-3 mr-1" />
+                            {errors.name}
+                          </motion.p>
+                        )}
+                      </div>
+                      <div>
+                        <Label htmlFor="phone" className="text-gray-700 font-medium text-sm block mb-2">
+                          Phone Number * <span className="text-gray-400 text-xs">(digits only)</span>
+                        </Label>
+                        <Input
+                          id="phone"
+                          name="phone"
+                          type="tel"
+                          value={formData.phone}
+                          onChange={handleInputChange}
+                          className={`h-10 w-full border-gray-300 focus:border-amber-500 focus:ring-amber-500 transition-all duration-300 ${errors.phone ? 'border-red-500' : ''}`}
+                          placeholder="10 digits minimum"
+                        />
+                        {errors.phone && (
+                          <motion.p 
+                            className="text-red-500 text-xs mt-1.5 flex items-center"
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.2 }}
+                          >
+                            <AlertCircle className="w-3 h-3 mr-1" />
+                            {errors.phone}
+                          </motion.p>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Email */}
+                    <div>
+                      <Label htmlFor="email" className="text-gray-700 font-medium text-sm block mb-2">
+                        Email Address *
+                      </Label>
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        className={`h-10 w-full border-gray-300 focus:border-amber-500 focus:ring-amber-500 transition-all duration-300 ${errors.email ? 'border-red-500' : ''}`}
+                        placeholder="your@email.com"
+                      />
+                      {errors.email && (
+                        <motion.p 
+                          className="text-red-500 text-xs mt-1.5 flex items-center"
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <AlertCircle className="w-3 h-3 mr-1" />
+                          {errors.email}
+                        </motion.p>
+                      )}
+                    </div>
+
+                    {/* Message */}
+                    <div>
+                      <Label htmlFor="message" className="text-gray-700 font-medium text-sm block mb-2">
+                        Message *
+                      </Label>
+                      <Textarea
+                        id="message"
+                        name="message"
+                        value={formData.message}
+                        onChange={handleInputChange}
+                        className={`min-h-24 w-full border-gray-300 focus:border-amber-500 focus:ring-amber-500 resize-none transition-all duration-300 ${errors.message ? 'border-red-500' : ''}`}
+                        placeholder="Tell us how we can help you..."
+                      />
+                      {errors.message && (
+                        <motion.p 
+                          className="text-red-500 text-xs mt-1.5 flex items-center"
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <AlertCircle className="w-3 h-3 mr-1" />
+                          {errors.message}
+                        </motion.p>
+                      )}
+                    </div>
+
+                    {/* Submit Button */}
+                    <Button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full h-10 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-semibold rounded-lg hover:shadow-md transition-all duration-300 disabled:opacity-50"
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-4 h-4 mr-2" />
+                          Send Message
+                        </>
+                      )}
+                    </Button>
+                  </motion.form>
+                )}
+              </AnimatePresence>
             </div>
           </motion.div>
 

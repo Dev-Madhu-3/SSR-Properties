@@ -11,10 +11,12 @@ const quickLinks = [
 ]
 
 const projects = [
-  { label: 'SSR Silicon Shine', href: '#projects' },
-  { label: 'SSR Tranquila', href: '#projects' },
-  { label: 'SSR Natura', href: '#projects' },
   { label: 'SSR Signature Gardenia', href: '#projects' },
+  { label: 'SSR Green Farms', href: '#projects' },
+  { label: 'SSR SK Signature', href: '#projects' },
+  { label: 'SSR Adhvam Residency', href: '#projects' },
+  { label: 'SSR Sri Lakshmi Lakeview Enclave', href: '#projects' },
+  { label: '', href: '#projects' },
 ]
 
 const services = [
@@ -26,18 +28,16 @@ const services = [
 ]
 
 const socialLinks = [
-  { icon: Facebook, href: 'https://facebook.com/ssrproperties', label: 'Facebook' },
-  { icon: Instagram, href: 'https://instagram.com/ssrproperties', label: 'Instagram' },
-  { icon: Linkedin, href: 'https://linkedin.com/company/ssrproperties', label: 'LinkedIn' },
-  { icon: Twitter, href: 'https://twitter.com/ssrproperties', label: 'Twitter' },
-  { icon: Youtube, href: 'https://youtube.com/ssrproperties', label: 'YouTube' },
+  { icon: Facebook, href: 'https://www.facebook.com/61565963476619/posts/122109427502532115/', label: 'Facebook' },
+  { icon: Instagram, href: 'https://www.instagram.com/ssr_signature_gardenia', label: 'Instagram' },
+  { icon: Youtube, href: 'https://youtube.com/@ssrproperties-j1q?si=nDynniVPAITIwa7_', label: 'YouTube' },
 ]
 
 export default function Footer() {
   const scrollToSection = (href) => {
     const targetId = href.replace('#', '')
     const element = document.getElementById(targetId)
-    
+
     if (element) {
       const offsetTop = element.offsetTop - 80
       window.scrollTo({
@@ -76,9 +76,9 @@ export default function Footer() {
                 <p className="text-gray-400 text-sm">Building Dreams Since 2021</p>
               </div>
             </div>
-            
+
             <p className="text-gray-400 mb-6 leading-relaxed">
-              Leading real estate developer in India, offering luxury villas, premium apartments, 
+              Leading real estate developer in India, offering luxury villas, premium apartments,
               and smart investment opportunities across top cities.
             </p>
 

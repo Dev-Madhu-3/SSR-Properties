@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
-import { Check, MapPin, Home, Maximize, Trees, Car, Shield, Waves, Dumbbell, Play, Download, Loader2, CheckCircle } from 'lucide-react'
+import { Check, MapPin, Home, Maximize, Trees, Car, Shield, Waves, Dumbbell, Play, Download, Loader2, CheckCircle, AlertCircle, X, Building, Send } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Dialog, DialogContent } from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
@@ -43,10 +43,13 @@ export default function ProjectDetail() {
   const [showBrochureModal, setShowBrochureModal] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
+  const [errors, setErrors] = useState({})
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
     email: '',
+    projectName: '',
+    date: '',
     message: '',
   })
 
@@ -58,18 +61,54 @@ export default function ProjectDetail() {
     }
   }
 
+  const validateForm = () => {
+    const newErrors = {}
+    if (!formData.name.trim()) {
+      newErrors.name = 'Full name is required'
+    }
+    if (!formData.projectName.trim()) {
+      newErrors.projectName = 'Please select a project'
+    }
+    if (!formData.phone.trim()) {
+      newErrors.phone = 'Phone number is required'
+    } else if (!/^[0-9\+\-\s\(\)]{10,}$/.test(formData.phone)) {
+      newErrors.phone = 'Phone number must contain only digits and be at least 10 characters'
+    }
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email address is required'
+    } else {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      if (!emailRegex.test(formData.email)) {
+        newErrors.email = 'Please enter a valid email address'
+      }
+    }
+    return newErrors
+  }
+
   const handleInputChange = (e) => {
     const { name, value } = e.target
     setFormData(prev => ({ ...prev, [name]: value }))
+    if (errors[name]) {
+      setErrors(prev => ({ ...prev, [name]: '' }))
+    }
   }
 
-  const handleBrochureSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
+
+    // Validate form
+    const newErrors = validateForm()
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors)
+      toast.error('Please fill in all required fields correctly')
+      return
+    }
+
     setIsSubmitting(true)
 
     try {
       const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID'
-      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID2 || 'YOUR_TEMPLATE_ID'
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID'
       const userId = import.meta.env.VITE_EMAILJS_USER_ID || 'YOUR_USER_ID'
 
       await emailjs.send(
@@ -79,6 +118,8 @@ export default function ProjectDetail() {
           name: formData.name,
           email: formData.email,
           phone: formData.phone,
+          date: formData.date,
+          project: formData.projectName,
           message: formData.message,
           to_email: 'yanamalaveera01@gmail.com, surendraoffline@gmail.com, sales@ssrproperties.in, info@ssrproperties.in',
         },
@@ -87,17 +128,26 @@ export default function ProjectDetail() {
 
       setIsSuccess(true)
       toast.success('Thank you! We will contact you within 24 hours.')
-      // Open brochure PDF immediately
-      window.open('/Gundur Brochure_17-06-23 (1).pdf', '_blank')
+
+      // Open brochure in new tab
+      window.open('/SSR SIGNATURE GARDENIA Broucher 09-01-2026 AW.pdf', '_blank')
 
       setTimeout(() => {
-        setIsSuccess(false)
-        setFormData({ name: '', phone: '', email: '', message: '' })
         setShowBrochureModal(false)
+        setIsSuccess(false)
+        setFormData({
+          name: '',
+          phone: '',
+          email: '',
+          projectName: '',
+          date: '',
+          message: '',
+        })
+        setErrors({})
       }, 3000)
     } catch (error) {
       console.error('Email error:', error)
-      toast.error('Failed to send message. Please try calling us directly.')
+      toast.error('Failed to send request. Please try calling us directly.')
     } finally {
       setIsSubmitting(false)
     }
@@ -260,6 +310,8 @@ export default function ProjectDetail() {
       {/* Image Lightbox */}
       <Dialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>
         <DialogContent className="max-w-4xl p-0 overflow-hidden bg-black/90">
+          <DialogTitle className="sr-only">Property image</DialogTitle>
+          <DialogDescription className="sr-only">Full size property image view</DialogDescription>
           <img
             src={selectedImage}
             alt="Property view"
@@ -271,6 +323,8 @@ export default function ProjectDetail() {
       {/* Video Dialog */}
       <Dialog open={showVideo} onOpenChange={setShowVideo}>
         <DialogContent className="max-w-4xl p-0 overflow-hidden">
+          <DialogTitle className="sr-only">Project video</DialogTitle>
+          <DialogDescription className="sr-only">SSR Properties project video</DialogDescription>
           <div className="aspect-video">
             <iframe
               width="100%"
@@ -287,92 +341,253 @@ export default function ProjectDetail() {
 
       {/* Brochure Modal */}
       <Dialog open={showBrochureModal} onOpenChange={setShowBrochureModal}>
-        <DialogContent className="max-w-md">
-          <div className="p-6">
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">Download Brochure</h3>
-            <p className="text-gray-600 mb-6">
-              Fill out the form to download our project brochure.
-            </p>
+        <DialogContent className="max-w-md p-0 overflow-hidden">
+          <DialogTitle className="sr-only">Download Brochure</DialogTitle>
+          <DialogDescription className="sr-only">Fill out the form to download the project brochure</DialogDescription>
 
-            {isSuccess ? (
+          {/* Header */}
+          <motion.div
+            className="relative bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 p-6 text-white"
+            initial={{ height: "auto" }}
+            animate={{ height: "auto" }}
+          >
+            <button
+              onClick={() => setShowBrochureModal(false)}
+              className="absolute top-3 right-3 bg-white/20 backdrop-blur-sm rounded-full p-1.5 hover:bg-white/30 transition-all duration-300 z-10 cursor-pointer"
+            >
+              <X className="w-4 h-4" />
+            </button>
+
+            <div className="relative z-10">
               <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="text-center py-8"
+                className="flex items-center mb-1"
+                initial={{ opacity: 0, x: -15 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.4 }}
               >
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <CheckCircle className="w-8 h-8 text-green-500" />
-                </div>
-                <h4 className="text-lg font-semibold text-gray-900 mb-2">Thank You!</h4>
-                <p className="text-gray-600 text-sm">Your brochure download will start shortly.</p>
+                <Building className="w-6 h-6 mr-2" />
+                <h2 className="text-2xl font-bold">Book Your Site Visit</h2>
               </motion.div>
-            ) : (
-              <form onSubmit={handleBrochureSubmit} className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="brochure-name">Full Name *</Label>
-                  <Input
-                    id="brochure-name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    placeholder="John Doe"
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="brochure-phone">Phone Number *</Label>
-                  <Input
-                    id="brochure-phone"
-                    name="phone"
-                    type="tel"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    placeholder="+91 98765 43210"
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="brochure-email">Email Address</Label>
-                  <Input
-                    id="brochure-email"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    placeholder="you@example.com"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="brochure-message">Message</Label>
-                  <Textarea
-                    id="brochure-message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    placeholder="Tell us about your requirements..."
-                    rows={3}
-                    className="resize-none"
-                  />
-                </div>
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-[#c89b3c] to-[#e6c66a] hover:from-[#b88a2d] hover:to-[#d5b559] text-white font-semibold rounded-full"
+              <motion.p
+                className="text-white/90 text-sm ml-8"
+                initial={{ opacity: 0, x: -15 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.4, delay: 0.1 }}
+              >
+                Schedule a personalized tour of your dream property
+              </motion.p>
+            </div>
+          </motion.div>
+
+          {/* Content */}
+          <div className="px-6 py-6 max-h-[calc(85vh-200px)] overflow-y-auto">
+            <AnimatePresence mode="wait">
+              {isSuccess ? (
+                <motion.div
+                  key="success"
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.8, opacity: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="text-center py-8"
                 >
-                  {isSubmitting ? (
-                    <>
-                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                      Sending...
-                    </>
-                  ) : (
-                    <>
-                      <Download className="w-4 h-4 mr-2" />
-                      Download Brochure
-                    </>
-                  )}
-                </Button>
-              </form>
-            )}
+                  <motion.div
+                    className="relative inline-flex justify-center items-center w-16 h-16 mb-4"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ delay: 0.2, type: "spring", stiffness: 200, damping: 15 }}
+                  >
+                    <div className="absolute inset-0 bg-green-500 rounded-full opacity-20 animate-ping"></div>
+                    <div className="relative bg-green-500 rounded-full w-16 h-16 flex items-center justify-center">
+                      <CheckCircle className="w-8 h-8 text-white" />
+                    </div>
+                  </motion.div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">
+                    Thank You!
+                  </h3>
+                  <p className="text-gray-600 text-sm max-w-sm">
+                    We've received your booking request. We'll contact you within 24 hours to confirm your site visit.
+                  </p>
+                </motion.div>
+              ) : (
+                <motion.form
+                  key="form"
+                  onSubmit={handleSubmit}
+                  className="space-y-5"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.4 }}
+                >
+                  {/* Full Name Field */}
+                  <div>
+                    <Label htmlFor="name" className="text-gray-700 font-medium text-sm block mb-2">
+                      Full Name *
+                    </Label>
+                    <Input
+                      id="name"
+                      name="name"
+                      type="text"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className={`h-10 w-full border-gray-300 focus:border-amber-500 focus:ring-amber-500 transition-all duration-300 ${errors.name ? 'border-red-500' : ''}`}
+                      placeholder="Enter your full name"
+                    />
+                    {errors.name && (
+                      <motion.p
+                        className="text-red-500 text-xs mt-1.5 flex items-center"
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <AlertCircle className="w-3 h-3 mr-1" />
+                        {errors.name}
+                      </motion.p>
+                    )}
+                  </div>
+
+                  {/* Project Name Field */}
+                  <div>
+                    <Label htmlFor="projectName" className="text-gray-700 font-medium text-sm block mb-2">
+                      Select Project *
+                    </Label>
+                    <select
+                      id="projectName"
+                      name="projectName"
+                      value={formData.projectName}
+                      onChange={handleInputChange}
+                      className={`h-10 w-full border border-gray-300 rounded-lg px-3 focus:border-amber-500 focus:ring-amber-500 focus:outline-none transition-all duration-300 text-sm ${errors.projectName ? 'border-red-500' : ''}`}
+                    >
+                      <option value="">Choose a project</option>
+                      <option value="SSR SIGNATURE GARDENIA">SSR SIGNATURE GARDENIA</option>
+                      <option value="SSR GREEN FARMS">SSR GREEN FARMS</option>
+                      <option value="SSR SK SIGNATURE">SSR SK SIGNATURE</option>
+                    </select>
+                    {errors.projectName && (
+                      <motion.p
+                        className="text-red-500 text-xs mt-1.5 flex items-center"
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <AlertCircle className="w-3 h-3 mr-1" />
+                        {errors.projectName}
+                      </motion.p>
+                    )}
+                  </div>
+
+                  {/* Phone Number Field */}
+                  <div>
+                    <Label htmlFor="phone" className="text-gray-700 font-medium text-sm block mb-2">
+                      Phone Number * <span className="text-gray-400 text-xs">(digits only)</span>
+                    </Label>
+                    <Input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      className={`h-10 w-full border-gray-300 focus:border-amber-500 focus:ring-amber-500 transition-all duration-300 ${errors.phone ? 'border-red-500' : ''}`}
+                      placeholder="10 digits minimum"
+                    />
+                    {errors.phone && (
+                      <motion.p
+                        className="text-red-500 text-xs mt-1.5 flex items-center"
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <AlertCircle className="w-3 h-3 mr-1" />
+                        {errors.phone}
+                      </motion.p>
+                    )}
+                  </div>
+
+                  {/* Email Field */}
+                  <div>
+                    <Label htmlFor="email" className="text-gray-700 font-medium text-sm block mb-2">
+                      Email Address *
+                    </Label>
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className={`h-10 w-full border-gray-300 focus:border-amber-500 focus:ring-amber-500 transition-all duration-300 ${errors.email ? 'border-red-500' : ''}`}
+                      placeholder="your@email.com"
+                    />
+                    {errors.email && (
+                      <motion.p
+                        className="text-red-500 text-xs mt-1.5 flex items-center"
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <AlertCircle className="w-3 h-3 mr-1" />
+                        {errors.email}
+                      </motion.p>
+                    )}
+                  </div>
+
+                  {/* Date Field */}
+                  <div>
+                    <Label htmlFor="date" className="text-gray-700 font-medium text-sm block mb-2">
+                      Preferred Date
+                    </Label>
+                    <Input
+                      id="date"
+                      name="date"
+                      type="date"
+                      value={formData.date}
+                      onChange={handleInputChange}
+                      className="h-10 w-full border-gray-300 focus:border-amber-500 focus:ring-amber-500 transition-all duration-300"
+                      min={new Date().toISOString().split("T")[0]}
+                    />
+                  </div>
+
+                  {/* Message Field */}
+                  <div>
+                    <Label htmlFor="message" className="text-gray-700 font-medium text-sm block mb-2">
+                      Message
+                    </Label>
+                    <Textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      className="min-h-20 w-full border-gray-300 focus:border-amber-500 focus:ring-amber-500 resize-none transition-all duration-300 text-sm"
+                      placeholder="Tell us about your requirements..."
+                    />
+                  </div>
+
+                  {/* Submit Button */}
+                  <motion.div
+                    className="flex justify-end pt-2"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.3 }}
+                  >
+                    <Button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="h-10 px-6 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-semibold rounded-lg hover:shadow-md transition-all duration-300 disabled:opacity-50 text-sm"
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-4 h-4 mr-2" />
+                          Submit
+                        </>
+                      )}
+                    </Button>
+                  </motion.div>
+                </motion.form>
+              )}
+            </AnimatePresence>
           </div>
         </DialogContent>
       </Dialog>

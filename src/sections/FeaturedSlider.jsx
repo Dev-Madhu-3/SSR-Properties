@@ -44,7 +44,7 @@ const properties = [
     image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774967552/Lakeview_b99xxs.png',
     title: 'SSR Sri Lakshmi Lakeview Enclave',
     location: 'Kr puram, Bangalore',
-    price: '₹1 Cr onwards',
+    price: '₹85 L onwards',
     beds: 3,
     baths: 3,
     sqft: '1,200',

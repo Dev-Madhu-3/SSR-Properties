@@ -8,7 +8,7 @@ const featuredProjects = [
   {
     name: 'SSR Signature Gardenia',
     location: 'Kithaganuru, Bangalore',
-    price: '₹85L onwards',
+    price: '₹1 Cr onwards',
     rating: 4.9,
     image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774809091/Signature_Gardenia_SSR_uueh2e.jpg',
     status: 'On going',
@@ -26,7 +26,7 @@ const featuredProjects = [
   {
     name: 'SSR FarmLands',
     location: 'Outer Ring Road, Bangalore',
-    price: '₹45L onwards',
+    price: '₹35L onwards',
     rating: 4.7,
     image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774846011/SSR_FarmLands_ne05hu.png',
     status: 'Available',

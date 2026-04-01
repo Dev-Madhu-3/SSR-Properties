@@ -40,17 +40,14 @@ const ProjectDetailModal = () => {
   const [isClosing, setIsClosing] = useState(false);
   const controls = useAnimation();
 
-  // Early return if modal is not open or project is null
-  if (!modals.projectDetail.isOpen || !project) return null;
-
   // Generate additional images for the carousel
-  const projectImages = [
+  const projectImages = project ? [
     project.image,
     `https://picsum.photos/seed/${project.name}1/1200/800.jpg`,
     `https://picsum.photos/seed/${project.name}2/1200/800.jpg`,
     `https://picsum.photos/seed/${project.name}3/1200/800.jpg`,
     `https://picsum.photos/seed/${project.name}4/1200/800.jpg`,
-  ];
+  ] : [];
 
   useEffect(() => {
     if (modals.projectDetail.isOpen) {
@@ -151,7 +148,7 @@ const ProjectDetailModal = () => {
 
   return (
     <AnimatePresence mode="wait">
-      {modals.projectDetail.isOpen && (
+      {modals.projectDetail.isOpen && project && (
         <motion.div
           variants={containerVariants}
           initial="hidden"

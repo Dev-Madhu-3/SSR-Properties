@@ -177,6 +177,10 @@ export default function Projects() {
                     <Button
                       variant="ghost"
                       className="w-full text-[#c89b3c] hover:bg-[#c89b3c]/10 group/btn"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openModal("projectDetail", project);
+                      }}
                     >
                       View Details
                       <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover/btn:translate-x-1" />
