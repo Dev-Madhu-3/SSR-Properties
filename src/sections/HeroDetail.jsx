@@ -8,7 +8,7 @@ const featuredProjects = [
   {
     name: 'SSR Signature Gardenia',
     location: 'Kithaganuru, Bangalore',
-    price: '₹1 Cr onwards',
+    price: '₹99 L onwards',
     rating: 4.9,
     image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774809091/Signature_Gardenia_SSR_uueh2e.jpg',
     status: 'On going',

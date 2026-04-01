@@ -197,7 +197,7 @@ export default function Hero({ onViewHero }) {
                 </div>
                 <div className="flex justify-between items-center">
                   <div className="text-white">
-                    <span className="text-2xl font-bold">₹1 CR</span>
+                    <span className="text-2xl font-bold">₹99 L</span>
                     <span className="text-white/60 text-sm"> onwards</span>
                   </div>
                   <Button

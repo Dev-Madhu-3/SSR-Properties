@@ -28,7 +28,7 @@ const services = [
 ]
 
 const socialLinks = [
-  { icon: Facebook, href: 'https://www.facebook.com/61565963476619/posts/122109427502532115/', label: 'Facebook' },
+  { icon: Facebook, href: '', label: 'Facebook' },
   { icon: Instagram, href: 'https://www.instagram.com/ssr_signature_gardenia', label: 'Instagram' },
   { icon: Youtube, href: 'https://youtube.com/@ssrproperties-j1q?si=nDynniVPAITIwa7_', label: 'YouTube' },
 ]
@@ -85,14 +85,14 @@ export default function Footer() {
             <div className="space-y-3 mb-6">
               <div className="flex items-center gap-3 text-gray-400">
                 <Phone className="w-5 h-5 text-[#c89b3c]" />
-                <span>+91 9632616633x`</span>
+                <span>+91 9632616633</span>
               </div>
               <div className="flex items-center gap-3 text-gray-400">
                 <Mail className="w-5 h-5 text-[#c89b3c]" />
                 <span>sales@ssrproperties.in</span>
               </div>
               <div className="flex items-center gap-3 text-gray-400">
-                <MapPin className="w-5 h-5 text-[#c89b3c]" />
+                <MapPin className="w-9 h-9 text-[#c89b3c]" />
                 <span> 3rd floor, RNX Complex, Tc Palya main road, Anadapura circle, opp. Bharat petrol pump, Bengaluru, Karnataka - 560036</span>
               </div>
             </div>
@@ -172,7 +172,7 @@ export default function Footer() {
         </div>
 
         {/* Newsletter */}
-        <div className="mt-12 pt-12 border-t border-gray-800">
+        {/* <div className="mt-12 pt-12 border-t border-gray-800">
           <div className="grid lg:grid-cols-2 gap-8 items-center">
             <div>
               <h4 className="text-xl font-semibold mb-2">Subscribe to Our Newsletter</h4>
@@ -196,7 +196,7 @@ export default function Footer() {
               </button>
             </form>
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* Bottom Bar */}
