@@ -23,7 +23,7 @@ const properties = [
     id: 3,
     image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774846011/SSR_SK_Arcade_mris4i.png',
     title: 'SSR SK Signature',
-    location: 'Kithaganur - Padmeshwari Nagar(Battarahalli), Bangalore - 560049',
+    location: ' Kithaganur - Padmeshwari Nagar(Battarahalli), Bangalore - 560049',
     price: '₹75 L onwards',
     beds: 3,
     baths: 2,

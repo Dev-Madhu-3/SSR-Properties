@@ -331,7 +331,7 @@ export const projects = [
   {
     id: 3,
     name: 'SSR SK Signature ',
-    location: 'Bangalore',
+    location: 'Kithaganur - Padmeshwari Nagar(Battarahalli), Bangalore - 560049',
     image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774871826/24.jpg_2_ks6ipn.jpg',
     status: 'On Going',
     price: '₹ 1 Cr onwards',
