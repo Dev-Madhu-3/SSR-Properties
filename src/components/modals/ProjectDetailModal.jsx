@@ -27,6 +27,7 @@ import {
   Bed,
   Bath,
   Square,
+  Waves
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -43,10 +44,10 @@ const ProjectDetailModal = () => {
   // Generate additional images for the carousel
   const projectImages = project ? [
     project.image,
-    `https://res.cloudinary.com/djuoignk5/image/upload/v1774871829/6.jpg_cltvxt.jpg`,
-    `https://res.cloudinary.com/djuoignk5/image/upload/v1774871826/24.jpg_2_ks6ipn.jpg`,
-    `https://res.cloudinary.com/djuoignk5/image/upload/v1774871825/h6.jpg_zxqqig.jpg`,
-    `https://res.cloudinary.com/djuoignk5/image/upload/v1774809539/SSR_Signature_Gardenia_vf7jd4.jpg`,
+    `https://picsum.photos/seed/${project.name}1/1200/800.jpg`,
+    `https://picsum.photos/seed/${project.name}2/1200/800.jpg`,
+    `https://picsum.photos/seed/${project.name}3/1200/800.jpg`,
+    `https://picsum.photos/seed/${project.name}4/1200/800.jpg`,
   ] : [];
 
   useEffect(() => {
@@ -127,16 +128,18 @@ const ProjectDetailModal = () => {
   const amenityIcons = {
     "High-Speed Internet": Wifi,
     Parking: Car,
+    // Gym: Dumbbell,
     Garden: Trees,
     Security: Shield,
     "Power Backup": Zap,
     "Club House": Users,
-    "Swimming Pool": Dumbbell,
+    "Swimming Pool": Waves,
   };
 
   const amenities = [
     "High-Speed Internet",
     "Parking",
+    // "Gym",
     "Garden",
     "Security",
     "Power Backup",
@@ -248,11 +251,10 @@ const ProjectDetailModal = () => {
                   <button
                     key={index}
                     onClick={() => !isClosing && setCurrentImageIndex(index)}
-                    className={`h-2 rounded-full transition-all duration-300 ${
-                      index === currentImageIndex
-                        ? "bg-white w-8"
-                        : "bg-white/50"
-                    }`}
+                    className={`h-2 rounded-full transition-all duration-300 ${index === currentImageIndex
+                      ? "bg-white w-8"
+                      : "bg-white/50"
+                      }`}
                   />
                 ))}
               </div>
@@ -337,7 +339,7 @@ const ProjectDetailModal = () => {
                   <span className="w-1 h-6 bg-amber-500 mr-3 rounded-full"></span>
                   Available Configurations
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className={`grid gap-4 ${project.name.includes("SSR signature Gardenia") || project.name.includes("SSR Signature Gardenia") ? "grid-cols-1 md:grid-cols-2" : "grid-cols-1 md:grid-cols-3"}`}>
                   {project.features.includes("2 BHK") && (
                     <div className="bg-gradient-to-br from-white/5 to-white/10 border border-white/10 rounded-xl p-4 hover:from-white/10 hover:to-white/15 transition-all duration-300">
                       <div className="flex items-center justify-between mb-2">
@@ -353,14 +355,18 @@ const ProjectDetailModal = () => {
                         1,250 - 1,450 sq.ft
                       </p>
                       <div className="flex items-center justify-between text-sm text-gray-300">
-                        <div className="flex items-center">
-                          <Bed className="w-4 h-4 mr-1" />
-                          <span>2</span>
-                        </div>
-                        <div className="flex items-center">
-                          <Bath className="w-4 h-4 mr-1" />
-                          <span>2</span>
-                        </div>
+                        {!project.name.includes("SSR Green Farms") && (
+                          <>
+                            <div className="flex items-center">
+                              <Bed className="w-4 h-4 mr-1" />
+                              <span>2</span>
+                            </div>
+                            <div className="flex items-center">
+                              <Bath className="w-4 h-4 mr-1" />
+                              <span>2</span>
+                            </div>
+                          </>
+                        )}
                         <div className="flex items-center">
                           <Square className="w-4 h-4 mr-1" />
                           <span>2</span>
@@ -383,14 +389,18 @@ const ProjectDetailModal = () => {
                         1,650 - 1,850 sq.ft
                       </p>
                       <div className="flex items-center justify-between text-sm text-gray-300">
-                        <div className="flex items-center">
-                          <Bed className="w-4 h-4 mr-1" />
-                          <span>3</span>
-                        </div>
-                        <div className="flex items-center">
-                          <Bath className="w-4 h-4 mr-1" />
-                          <span>3</span>
-                        </div>
+                        {!project.name.includes("SSR Green Farms") && (
+                          <>
+                            <div className="flex items-center">
+                              <Bed className="w-4 h-4 mr-1" />
+                              <span>3</span>
+                            </div>
+                            <div className="flex items-center">
+                              <Bath className="w-4 h-4 mr-1" />
+                              <span>3</span>
+                            </div>
+                          </>
+                        )}
                         <div className="flex items-center">
                           <Square className="w-4 h-4 mr-1" />
                           <span>3</span>
@@ -404,25 +414,58 @@ const ProjectDetailModal = () => {
                       <span className="text-purple-500 font-bold">Premium</span>
                     </div>
                     <h4 className="text-white font-bold text-lg mb-1">
-                      Individual Houses & Plots
+                      Plots
                     </h4>
                     <p className="text-gray-400 text-sm mb-3">
-                      800 - 1800 sq.ft
+                      {project.price}
                     </p>
                     <div className="flex items-center justify-between text-sm text-gray-300">
+                      {!project.name.includes("SSR Green Farms") && (
+                        <>
+                          <div className="flex items-center">
+                            <Bed className="w-4 h-4 mr-1" />
+                            <span>4</span>
+                          </div>
+                          <div className="flex items-center">
+                            <Bath className="w-4 h-4 mr-1" />
+                            <span>4</span>
+                          </div>
+                        </>
+                      )}
                       <div className="flex items-center">
-                        
-                        
-                      </div>
-                      <div className="flex items-center">
-                       
-                        
-                      </div>
-                      <div className="flex items-center">
-                  
+                        <Square className="w-4 h-4 mr-1" />
+                        <span>Private</span>
                       </div>
                     </div>
                   </div>
+                  {!project.name.includes("SSR Green Farms") && !project.name.includes("SSR Advam Residency") && (
+                    <div className="bg-gradient-to-br from-white/5 to-white/10 border border-white/10 rounded-xl p-4 hover:from-white/10 hover:to-white/15 transition-all duration-300">
+                      <div className="flex items-center justify-between mb-2">
+                        <Building className="w-5 h-5 text-amber-500" />
+                        <span className="text-purple-500 font-bold">Premium</span>
+                      </div>
+                      <h4 className="text-white font-bold text-lg mb-1">
+                        Individual Houses
+                      </h4>
+                      <p className="text-gray-400 text-sm mb-3">
+                        {project.price}
+                      </p>
+                      <div className="flex items-center justify-between text-sm text-gray-300">
+                        <div className="flex items-center">
+                          <Bed className="w-4 h-4 mr-1" />
+                          <span>4</span>
+                        </div>
+                        <div className="flex items-center">
+                          <Bath className="w-4 h-4 mr-1" />
+                          <span>4</span>
+                        </div>
+                        <div className="flex items-center">
+                          <Square className="w-4 h-4 mr-1" />
+                          <span>Private</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </motion.div>
 
@@ -452,32 +495,34 @@ const ProjectDetailModal = () => {
               </motion.div>
 
               {/* Amenities */}
-              <motion.div
-                variants={itemVariants}
-                className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/10"
-              >
-                <h3 className="text-xl font-bold text-white mb-4 flex items-center">
-                  <span className="w-1 h-6 bg-amber-500 mr-3 rounded-full"></span>
-                  Premium Amenities
-                </h3>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {amenities.map((amenity, index) => {
-                    const IconComponent = amenityIcons[amenity];
-                    return (
-                      <motion.div
-                        key={amenity}
-                        whileHover={{ y: -5 }}
-                        className="bg-gradient-to-br from-white/5 to-white/10 border border-white/10 rounded-xl p-4 flex flex-col items-center justify-center hover:from-white/10 hover:to-white/15 transition-all duration-300"
-                      >
-                        <IconComponent className="w-8 h-8 text-amber-500 mb-2" />
-                        <span className="text-white text-xs font-medium text-center">
-                          {amenity}
-                        </span>
-                      </motion.div>
-                    );
-                  })}
-                </div>
-              </motion.div>
+              {!project.name.includes("SSR Green Farms") && (
+                <motion.div
+                  variants={itemVariants}
+                  className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/10"
+                >
+                  <h3 className="text-xl font-bold text-white mb-4 flex items-center">
+                    <span className="w-1 h-6 bg-amber-500 mr-3 rounded-full"></span>
+                    Premium Amenities
+                  </h3>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {amenities.map((amenity, index) => {
+                      const IconComponent = amenityIcons[amenity];
+                      return (
+                        <motion.div
+                          key={amenity}
+                          whileHover={{ y: -5 }}
+                          className="bg-gradient-to-br from-white/5 to-white/10 border border-white/10 rounded-xl p-4 flex flex-col items-center justify-center hover:from-white/10 hover:to-white/15 transition-all duration-300"
+                        >
+                          <IconComponent className="w-8 h-8 text-amber-500 mb-2" />
+                          <span className="text-white text-xs font-medium text-center">
+                            {amenity}
+                          </span>
+                        </motion.div>
+                      );
+                    })}
+                  </div>
+                </motion.div>
+              )}
 
               {/* Virtual Tour */}
               {/* <motion.div

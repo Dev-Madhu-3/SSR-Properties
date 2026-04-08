@@ -150,6 +150,9 @@ export default function Projects() {
                       <p className="text-white font-bold text-xl">
                         {project.price}
                       </p>
+                        <p className="text-white font-bold text-xl">
+                        {project.price2}
+                      </p>
                     </div>
                   </div>
 

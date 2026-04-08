@@ -141,7 +141,7 @@ export default function Navbar({ activeSection }) {
                 whileHover={{ scale: 1.05 }}
               >
                 <Phone className="w-4 h-4" />
-                <span>+91 9632616633</span>
+                <span>+91 9900081666</span>
               </motion.a>
               <motion.button
                 onClick={() => openModal("bookVisit")}
@@ -215,7 +215,7 @@ export default function Navbar({ activeSection }) {
                     className="flex items-center gap-2 text-gray-700 mb-4"
                   >
                     <Phone className="w-5 h-5 text-[#c89b3c]" />
-                    +91 9632616633
+                    +91 9900081666
                   </a>
                   <button
                     onClick={() => {

@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
-import { Check, MapPin, Home, Maximize, Trees, Car, Shield, Waves, Dumbbell, Play, Download, Loader2, CheckCircle, AlertCircle, X, Building, Send } from 'lucide-react'
+import { Check, MapPin, Home, Maximize, Trees, Car, Shield,Activity, Waves, Dumbbell, Play,Baby, Download, Loader2, CheckCircle, AlertCircle, X, Building, Send } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
@@ -11,10 +11,12 @@ import emailjs from 'emailjs-com'
 
 const amenities = [
   { icon: Shield, label: '24/7 Security' },
-  { icon: Car, label: 'Parking' },
+  { icon: Activity, label: 'Jogging Track' },
   { icon: Trees, label: 'Parks' },
   { icon: Waves, label: 'Swimming Pool' },
   { icon: Maximize, label: 'Club House' },
+  { icon: Baby, label: "Children's Play Area" },
+  
 ]
 
 const highlights = [
@@ -22,14 +24,14 @@ const highlights = [
   '25, 30, 35 & 40 ft Asphalt Roads',
   'Integrated Drainage System',
   'East, West & North , South Facing Homes',
-  'Underground Electrical Cabling',
+  'Electrical Cabling',
   'Street Lighting',
   'Children Play Area',
 ]
 
 const galleryImages = [
   'https://res.cloudinary.com/djuoignk5/image/upload/v1774809635/SSR_img_f98wby.jpg',
-  'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80',
+  'https://res.cloudinary.com/djuoignk5/image/upload/v1775475350/enhanced_house_hirwtm.png',
   'https://res.cloudinary.com/djuoignk5/image/upload/v1774809539/SSR_Signature_Gardenia_vf7jd4.jpg',
   'https://res.cloudinary.com/djuoignk5/image/upload/v1774809091/Signature_Gardenia_SSR_uueh2e.jpg',
 ]
@@ -298,8 +300,8 @@ export default function ProjectDetail() {
                 transition={{ duration: 0.5, delay: 0.8 }}
                 className="absolute -top-4 -right-4 bg-white rounded-2xl p-4 shadow-xl"
               >
-                <p className="text-xs text-gray-500">Starting from</p>
-                <p className="text-2xl font-bold text-[#c89b3c]">₹85L</p>
+                <p className="text-xs text-gray-500">Plots Starting from</p>
+                <p className="text-2xl font-bold text-[#c89b3c]">₹45L</p>
               </motion.div>
             </div>
           </motion.div>

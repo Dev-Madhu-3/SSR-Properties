@@ -4,11 +4,11 @@ import { CheckCircle, Award, Users, Building2, TrendingUp, Shield, ArrowRight } 
 import { Button } from '@/components/ui/button'
 
 const features = [
-  '24/7 Security & Gated Community',
-  '25, 30, 35 & 40 ft Asphalt Roads',
-  'Integrated Drainage System',
-  'East, West & North , South Facing Homes',
-  'Rainwater Harvesting',
+  // '24/7 Security & Gated Community',
+  // '25, 30, 35 & 40 ft Asphalt Roads',
+  // 'Integrated Drainage System',
+  // 'East, West & North , South Facing Homes',
+  // 'Rainwater Harvesting',
 ]
 
 const values = [
@@ -63,8 +63,8 @@ export default function About({ onViewAbout }) {
             Building Trust, Creating Value, Shaping Your Future
           </h2>
           <p className="text-gray-600 max-w-3xl mx-auto text-lg">
-            SSR Properties is committed to shaping modern lifestyles through thoughtfully developed
-            residential layouts and farmland projects — focused on quality, transparency, and
+            SSR Properties is committed to shaping modern lifestyles through thoughtfully Crafted
+             Plotted development residential layouts , farmland projects and Luxury Apartments  — focused on quality, transparency, and
             lasting customer satisfaction.
           </p>
         </motion.div>
@@ -96,7 +96,7 @@ export default function About({ onViewAbout }) {
               className="absolute -bottom-8 -right-8 bg-gradient-to-br from-[#c89b3c] to-[#e6c66a] rounded-2xl p-6 shadow-xl"
             >
               <div className="text-white text-center">
-                <div className="text-4xl font-bold">2021</div>
+                <div className="text-4xl font-bold">2018</div>
                 <div className="text-sm opacity-90">Est. with Trust</div>
               </div>
             </motion.div>
@@ -119,13 +119,13 @@ export default function About({ onViewAbout }) {
             </p>
             <p className="text-gray-500 mb-6 flex items-center gap-2">
               <Building2 className="w-5 h-5 text-[#c89b3c]" />
-              3rd floor, RNX Complex, Tc Palya main road, Anadapura circle, opp. Bharat petrol pump, Bengaluru, Karnataka - 560036
+               Head Office at 3rd floor, RNX Complex, Tc Palya main road, Anadapura circle, opp. Bharat petrol pump, Bengaluru, Karnataka - 560036
             </p>
 
             <div className="space-y-4 text-gray-600 mb-8">
               <p>
-                Established in 2021, SSR Properties has been committed to shaping modern lifestyles
-                through well-planned residential layouts and farmland projects. We focus on delivering
+                Established in 2018, SSR Properties has been committed to shaping modern lifestyles
+                through well-planned residential layouts , farmland projects and Luxury Apartments . We focus on delivering
                 legally approved properties and affordable investment opportunities — with clear
                 documentation and peace of mind for every buyer.
               </p>

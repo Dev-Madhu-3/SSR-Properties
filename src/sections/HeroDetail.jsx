@@ -12,32 +12,32 @@ const featuredProjects = [
     rating: 4.9,
     image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774809091/Signature_Gardenia_SSR_uueh2e.jpg',
     status: 'On going',
-    description: 'Luxury premium residential project with world-class amenities',
+    description: 'Premium Plotted Development Residential Layout with world-class amenities',
   },
   {
     name: 'SSR Advam Residency',
     location: 'KR Puram, Bangalore',
-    price: '₹75L onwards',
+    price: '₹60 L onwards',
     rating: 4.8,
     image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774846012/SSR_Advam_Residency_rqkyxk.png',
     status: 'Available',
-    description: 'Modern township with integrated community features',
+    description: '2 & 3 BHK Luxury Apartments with integrated community features',
   },
   {
     name: 'SSR FarmLands',
-    location: 'Outer Ring Road, Bangalore',
-    price: '₹35L onwards',
+    location: 'Mulbagal, Kolar(Just 1 hour from Bangalore)',
+    price: '₹36 L onwards',
     rating: 4.7,
     image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774846011/SSR_FarmLands_ne05hu.png',
     status: 'Available',
-    description: 'Plotted farmland investment opportunity with high appreciation',
+    description: 'Plotted farmland development with agricultural and recreational amenities',
   },
 ]
 
 const achievements = [
-  { value: '20+', label: 'Projects Completed', icon: Home },
-  { value: '1000+', label: 'Happy Families', icon: Users },
-  { value: '5+', label: 'Years Experience', icon: Award },
+  { value: '7+', label: 'Projects Completed', icon: Home },
+  { value: '900+', label: 'Happy Families', icon: Users },
+  { value: '10+', label: 'Years Experience', icon: Award },
   { value: '100%', label: 'Customer Satisfaction', icon: Star },
 ]
 
@@ -47,7 +47,7 @@ const highlights = [
   { title: 'Transparent Pricing', description: 'No hidden charges, clear documentation' },
   { title: 'Expert Team', description: 'Experienced professionals dedicated to excellence' },
 ]
-
+ 
 export default function HeroDetail({ onBack }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
@@ -86,7 +86,7 @@ export default function HeroDetail({ onBack }) {
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Discover our premium portfolio of residential and investment properties across India's top cities.
-            Building trust since 2021.
+            Building trust since 2018.
           </p>
         </motion.div>
 
@@ -220,7 +220,7 @@ export default function HeroDetail({ onBack }) {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="bg-gradient-to-r from-[#c89b3c] to-[#e6c66a] rounded-3xl p-12 text-white text-center mb-16"
         >
-          <h2 className="text-3xl font-bold mb-4">Building Trust Since 2021</h2>
+          <h2 className="text-3xl font-bold mb-4">Building Trust Since 2018</h2>
           <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
             Every project is backed by legal approval, clear documentation, and 100% customer satisfaction.
             Your investment is our responsibility.

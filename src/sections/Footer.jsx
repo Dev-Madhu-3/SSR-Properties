@@ -28,7 +28,7 @@ const services = [
 ]
 
 const socialLinks = [
-  { icon: Facebook, href: '', label: 'Facebook' },
+  { icon: Facebook, href: 'https://www.facebook.com/SSRSIGNATUREGARDENIA/', label: 'Facebook' },
   { icon: Instagram, href: 'https://www.instagram.com/ssr_signature_gardenia', label: 'Instagram' },
   { icon: Youtube, href: 'https://youtube.com/@ssrproperties-j1q?si=nDynniVPAITIwa7_', label: 'YouTube' },
 ]
@@ -73,7 +73,7 @@ export default function Footer() {
               </div>
               <div>
                 <h3 className="text-xl font-bold">SSR Properties</h3>
-                <p className="text-gray-400 text-sm">Building Dreams Since 2021</p>
+                <p className="text-gray-400 text-sm">Building Dreams Since 2018</p>
               </div>
             </div>
 
@@ -85,7 +85,7 @@ export default function Footer() {
             <div className="space-y-3 mb-6">
               <div className="flex items-center gap-3 text-gray-400">
                 <Phone className="w-5 h-5 text-[#c89b3c]" />
-                <span>+91 9632616633</span>
+                <span>+91 9900081666</span>
               </div>
               <div className="flex items-center gap-3 text-gray-400">
                 <Mail className="w-5 h-5 text-[#c89b3c]" />

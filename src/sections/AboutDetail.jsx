@@ -103,7 +103,7 @@ export default function AboutDetail({ onBack }) {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
           <Badge className="absolute top-6 left-6 bg-[#c89b3c] text-white text-base px-4 py-2">
-            Est. 2021
+            Est. 2018
           </Badge>
         </motion.div>
 
@@ -130,7 +130,7 @@ export default function AboutDetail({ onBack }) {
 
           <div className="space-y-4 text-gray-700 leading-relaxed">
             <p>
-              Established in 2021, SSR Properties has been committed to shaping modern lifestyles
+              Established in 2018, SSR Properties has been committed to shaping modern lifestyles
               through well-planned residential layouts and farmland projects. We focus on delivering
               legally approved properties and affordable investment opportunities — with c
               

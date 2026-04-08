@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, Play, TrendingUp, Shield, Home } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 const stats = [
-  { value: '20+', label: 'Projects Completed', icon: Home },
-  { value: '1000+', label: 'Happy Families', icon: TrendingUp },
-  { value: '5+', label: 'Years Experience', icon: Shield },
+  { value: '7+', label: 'Projects Completed', icon: Home },
+  { value: '900+', label: 'Happy Families', icon: TrendingUp },
+  { value: '10+', label: 'Years Experience', icon: Shield },
 ]
 
 const heroImages = [
@@ -16,14 +16,41 @@ const heroImages = [
   'https://res.cloudinary.com/djuoignk5/image/upload/v1774846011/SSR_FarmLands_ne05hu.png'
 ]
 
+const featuredProperties = [
+  {
+    id: 1,
+    name: 'SSR Signature Gardenia',
+    location: 'Kithaganuru , KR Puram, Bangalore',
+    image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774809091/Signature_Gardenia_SSR_uueh2e.jpg',
+    price: 'Plots  :46 L  | Individual Houses : ₹99 L',
+    priceNote: 'onwards'
+  },
+  {
+    id: 2,
+    name: 'SSR Green Farms',
+    location: 'NH75, Mulbagal, Kolar',
+    image: 'https://res.cloudinary.com/djuoignk5/image/upload/v1774846011/SSR_FarmLands_ne05hu.png',
+    price: 'FarmLand Plots : ₹36 L',
+    priceNote: 'onwards'
+  }
+]
+
 export default function Hero({ onViewHero }) {
   const [currentImage, setCurrentImage] = useState(0)
+  const [currentFeatured, setCurrentFeatured] = useState(0)
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % heroImages.length)
     }, 5000)
     return () => clearInterval(interval)
+  }, [])
+
+  useEffect(() => {
+    const featuredInterval = setInterval(() => {
+      setCurrentFeatured((prev) => (prev + 1) % featuredProperties.length)
+    }, 6000)
+    return () => clearInterval(featuredInterval)
   }, [])
 
   const scrollToSection = (id) => {
@@ -115,9 +142,9 @@ export default function Hero({ onViewHero }) {
               transition={{ duration: 0.8, delay: 0.6 }}
               className="text-lg sm:text-xl text-white/80 mb-8 max-w-xl"
             >
-              Luxury Villas • Premium Apartments • Smart Investments
+              Villa Plots • Individual Houses • Premium Apartments • FarmLand Plots • Smart Investment Plans •  Leading real estate developer across Bangalore .
               <br />
-              <span className="text-white/60">Building trust since 2021 across India's top cities</span>
+              <span className="text-white/60">Building trust since 2018 across India.</span>
             </motion.p>
 
             <motion.div
@@ -176,40 +203,59 @@ export default function Hero({ onViewHero }) {
             className="hidden lg:block"
           >
             <div className="relative">
-              <motion.div
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                className="bg-white/10 backdrop-blur-xl rounded-3xl p-6 border border-white/20"
-              >
-                <img
-                  src="https://res.cloudinary.com/djuoignk5/image/upload/v1774809091/Signature_Gardenia_SSR_uueh2e.jpg"
-                  alt="Featured Property"
-                  className="w-full h-64 object-cover rounded-2xl mb-4"
-                />
-                <div className="flex justify-between items-start mb-4">
-                  <div>
-                    <h3 className="text-white font-semibold text-lg">SSR Signature Gardenia</h3>
-                    <p className="text-white/60 text-sm">Kithaganuru, Bangalore</p>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={featuredProperties[currentFeatured].id}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0, y: [0, -10, 0] }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.6, y: { duration: 4, repeat: Infinity, ease: 'easeInOut' } }}
+                  className="bg-white/10 backdrop-blur-xl rounded-3xl p-6 border border-white/20"
+                >
+                  <img
+                    src={featuredProperties[currentFeatured].image}
+                    alt={featuredProperties[currentFeatured].name}
+                    className="w-full h-64 object-cover rounded-2xl mb-4"
+                  />
+                  <div className="flex justify-between items-start mb-4">
+                    <div>
+                      <h3 className="text-white font-semibold text-lg">{featuredProperties[currentFeatured].name}</h3>
+                      <p className="text-white/60 text-sm">{featuredProperties[currentFeatured].location}</p>
+                    </div>
+                    <span className="bg-[#c89b3c] text-white text-xs px-3 py-1 rounded-full">
+                      Featured
+                    </span>
                   </div>
-                  <span className="bg-[#c89b3c] text-white text-xs px-3 py-1 rounded-full">
-                    Featured
-                  </span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <div className="text-white">
-                    <span className="text-2xl font-bold">₹99 L</span>
-                    <span className="text-white/60 text-sm"> onwards</span>
+                  <div className="flex justify-between items-center">
+                    <div className="text-white">
+                      <span className="text-2xl font-bold">{featuredProperties[currentFeatured].price}</span>
+                      <span className="text-white/60 text-sm"> {featuredProperties[currentFeatured].priceNote}</span>
+                    </div>
+                    <Button
+                      onClick={() => onViewHero && onViewHero()}
+                      size="sm"
+                      className="bg-white/20 hover:bg-white/30 text-white rounded-full"
+                    >
+                      <Play className="w-4 h-4 mr-1" />
+                      View
+                    </Button>
                   </div>
-                  <Button
-                    onClick={() => onViewHero && onViewHero()}
-                    size="sm"
-                    className="bg-white/20 hover:bg-white/30 text-white rounded-full"
-                  >
-                    <Play className="w-4 h-4 mr-1" />
-                    View
-                  </Button>
-                </div>
-              </motion.div>
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Property Indicators */}
+              <div className="absolute bottom-4 left-6 flex gap-2">
+                {featuredProperties.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentFeatured(index)}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      currentFeatured === index ? 'bg-[#c89b3c] w-6' : 'bg-white/30'
+                    }`}
+                    aria-label={`Featured property ${index + 1}`}
+                  />
+                ))}
+              </div>
 
               {/* Floating Badge */}
               {/* <motion.div
