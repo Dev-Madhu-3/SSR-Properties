@@ -211,11 +211,11 @@ export default function Navbar({ activeSection }) {
                   className="pt-4 border-t"
                 >
                   <a
-                    href="tel:+919632616633"
+                    href="tel:+919071771144"
                     className="flex items-center gap-2 text-gray-700 mb-4"
                   >
                     <Phone className="w-5 h-5 text-[#c89b3c]" />
-                    +91 9900081666
+                    +91 9071771155
                   </a>
                   <button
                     onClick={() => {
