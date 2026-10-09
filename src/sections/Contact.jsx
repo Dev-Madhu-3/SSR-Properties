@@ -21,7 +21,7 @@ const contactInfo = [
   {
     icon: Phone,
     title: "Phone",
-    details: ["+91 96326 16633", "+91 99002 28668"],
+    details: ["+91 90717 71144", "+91 90717 71155"],
     color: "from-blue-500 to-blue-600",
   },
   {
@@ -438,14 +438,14 @@ export default function Contact() {
               </p>
               <div className="flex flex-wrap gap-4">
                 <a
-                  href="tel:+919900228668"
+                  href="tel:+919071771144"
                   className="inline-flex items-center gap-2 bg-white text-[#c89b3c] px-6 py-3 rounded-full font-semibold hover:bg-white/90 transition-colors"
                 >
                   <Phone className="w-5 h-5" />
                   Call Now
                 </a>
                 <a
-                  href="https://wa.me/919900228668"
+                  href="https://wa.me/919071771144"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-white/20 text-white px-6 py-3 rounded-full font-semibold hover:bg-white/30 transition-colors"

@@ -134,14 +134,14 @@ export default function Navbar({ activeSection }) {
             {/* Desktop CTA */}
             <div className="hidden lg:flex items-center gap-4">
               <motion.a
-                href="tel:+919900228668"
+                href="tel:+919071771144"
                 className={`flex items-center gap-2 text-sm font-medium transition-colors duration-300 ${
                   isScrolled ? "text-gray-700" : "text-white/90"
                 }`}
                 whileHover={{ scale: 1.05 }}
               >
                 <Phone className="w-4 h-4" />
-                <span>+91 9900081666</span>
+                <span>+91 90717 71144</span>
               </motion.a>
               <motion.button
                 onClick={() => openModal("bookVisit")}
@@ -215,7 +215,7 @@ export default function Navbar({ activeSection }) {
                     className="flex items-center gap-2 text-gray-700 mb-4"
                   >
                     <Phone className="w-5 h-5 text-[#c89b3c]" />
-                    +91 9071771155
+                    +91 9071771144
                   </a>
                   <button
                     onClick={() => {
